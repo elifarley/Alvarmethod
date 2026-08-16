@@ -83,7 +83,15 @@ Open a **learning folder** (not this repo). Stronger models teach this better.
 
 Same thing in chat: “Teach me X. Probe first.”
 
-You should get: a few MCQs → a mermaid plan → **one** step → a quiz on that step. If the agent dumps a textbook chapter, stop it and say “one node only.”
+You should get: a few MCQs **in the harness quiz UI** (not letters in chat) → a mermaid plan → **one** step → a quiz on that step. If the agent dumps a textbook chapter, stop it and say “one node only.” If it pastes A/B/C/D instead of opening the picker, the skill is being ignored — say “use the quiz tool.”
+
+| Agent | Quiz tool |
+|-------|-----------|
+| Grok | `ask_user_question` |
+| Claude Code | `AskUserQuestion` |
+| Codex | `ask_user_question` |
+| OpenCode | `question` |
+| Pi | `quiz` / `ask_user` / `askUserQuestion` |
 
 Files it writes:
 

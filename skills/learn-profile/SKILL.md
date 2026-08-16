@@ -26,7 +26,7 @@ Install **how this mind wants to be taught**. The file is the teacher. Do not cr
 5. **Voice** — density, tone, hated LLM habits, language.
 6. **Artifacts** — Obsidian / markdown / no files.
 
-Do not ask all six in one message. 2–3 questions per turn.
+Do not ask all six in one message. 2–3 questions per turn, through the harness quiz UI in [../teach/references/quiz-ui.md](../teach/references/quiz-ui.md) — not as a markdown list.
 
 ## Write
 

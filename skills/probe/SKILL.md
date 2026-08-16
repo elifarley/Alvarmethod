@@ -17,6 +17,8 @@ metadata:
 
 Measure first. Do not teach during a probe except a one-line correction after they answer.
 
+**Quiz UI is mandatory.** Read [../teach/references/quiz-ui.md](../teach/references/quiz-ui.md) and call that tool. Never print A/B/C/D in the chat.
+
 ## Goal
 
 Produce `.alvar/maps/<slug>.md` that labels every dependency strand:
@@ -33,15 +35,7 @@ Produce `.alvar/maps/<slug>.md` that labels every dependency strand:
 - If they already listed solid ground, skip those strands.
 - Invite a talk-through: a wrong reason + right letter is `edge`, not `known`.
 
-```
-Q<n>. <strand name in the heading, question in the body>
-A. …
-B. …
-C. …
-D. I don't know
-```
-
-One right answer. No trick options that hinge on wording.
+One right answer. No trick options that hinge on wording. Put **I don't know** as an option. Do not mark the correct choice recommended.
 
 ## Scoring
 

@@ -10,8 +10,8 @@ Load this after `philosophy.md`. Do not skip phases unless the learner already h
 Measure the edge of understanding before teaching.
 
 - Start broad, then binary-search every strand the lesson will depend on.
-- Use graded multiple-choice (include "I don't know").
-- Ask 1–3 questions at a time. Wait. Do not dump a long exam.
+- Use graded multiple-choice (include "I don't know") through the **harness quiz UI** — see [quiz-ui.md](quiz-ui.md). Never dump A/B/C/D in chat.
+- Ask 1–3 questions at a time. Wait for the tool. Do not dump a long exam.
 - Let the learner talk through reasoning in a note or in chat. Treat that as signal.
 - If they already stated solid ground, skip those strands.
 - Write the map to `.alvar/maps/<topic>.md`.

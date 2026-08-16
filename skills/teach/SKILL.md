@@ -22,7 +22,8 @@ Read, in order, before the first question:
 1. [references/philosophy.md](references/philosophy.md)
 2. [references/process.md](references/process.md)
 3. [references/learner-files.md](references/learner-files.md)
-4. `.alvar/LEARNER.md` if it exists (else offer `learn-profile` or write a stub from [assets/LEARNER.md](assets/LEARNER.md) after 3–5 questions)
+4. [references/quiz-ui.md](references/quiz-ui.md) — **required.** Quizzes use the harness question tool. Never A/B/C/D in chat.
+5. `.alvar/LEARNER.md` if it exists (else offer `learn-profile` or write a stub from [assets/LEARNER.md](assets/LEARNER.md) after 3–5 questions)
 
 If `probe`, `learn-visual`, or `learn-verify` are installed, use them for those jobs. If not, follow the same protocols inline.
 
@@ -46,15 +47,9 @@ If `probe`, `learn-visual`, or `learn-verify` are installed, use them for those 
 
 ## Quiz shape
 
-```
-Q<n>. <one thing this node needs>
-A. …
-B. …
-C. …
-D. I don't know
-```
+Call the harness quiz UI in [references/quiz-ui.md](references/quiz-ui.md). Do not paste letters in chat.
 
-Wait. Score. Update the map and session file. Then either the next node, a retry, or an inserted prerequisite.
+Wait for the tool result. Score. Update the map and session file. Then either the next node, a retry, or an inserted prerequisite.
 
 ## When they interrupt
 
