@@ -1,0 +1,37 @@
+{
+  "name": "alvarmethod",
+  "version": "1.0.0",
+  "description": "One-to-one AI teaching skills (Alvar method) for Codex, Claude Code, Grok, Pi, and OpenCode",
+  "bin": {
+    "alvarmethod": "bin/alvarmethod.js"
+  },
+  "files": [
+    "bin",
+    "skills",
+    "install.sh",
+    "templates",
+    "source"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vasanthsreeram/Alvarmethod.git"
+  },
+  "homepage": "https://github.com/vasanthsreeram/Alvarmethod",
+  "bugs": {
+    "url": "https://github.com/vasanthsreeram/Alvarmethod/issues"
+  },
+  "keywords": [
+    "agent-skills",
+    "skills",
+    "teach",
+    "claude-code",
+    "codex",
+    "opencode",
+    "grok",
+    "pi"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}

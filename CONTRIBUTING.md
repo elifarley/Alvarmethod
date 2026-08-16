@@ -10,7 +10,7 @@ Credit stays with **[Eero Alvar — How I Use AI to Learn Things](https://youtu.
 
 - Tighter `SKILL.md` instructions (agents follow them more often)
 - Quiz-UI coverage for a harness we missed or renamed
-- Fixes so `./install.sh` lands in the right folders
+- Fixes so `./install.sh` / `npx` / `npx skills add` land in the right folders
 - One missing specialist skill that the loop actually needs
 - Transcript / attribution corrections
 

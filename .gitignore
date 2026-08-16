@@ -3,3 +3,8 @@
 *.bak
 .idea/
 .vscode/
+.env
+.env.*
+.emdash.env
+*.pem
+node_modules/

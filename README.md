@@ -1,27 +1,119 @@
-# Alvarmethod
+<p align="center">
+  <img src="docs/assets/banner.svg" alt="Alvarmethod — probe, plan, teach" width="960" />
+</p>
 
-One teacher. One mind. Portable agent skills that run Eero Alvar’s AI learning loop.
+<p align="center">
+  <strong>One teacher. One mind.</strong><br/>
+  Portable agent skills that run Eero Alvar’s AI learning loop.
+</p>
 
-Credit: **[Eero Alvar — *How I Use AI to Learn Things*](https://youtu.be/kzcI5F4tGiU)** (2026-08-14). This repo implements that method as Agent Skills. It is not Eero’s original Pi setup (quiz extension, Obsidian MD-log). Captions: [`source/eero-alvar-how-i-use-ai-to-learn-things.md`](source/eero-alvar-how-i-use-ai-to-learn-things.md).
+<p align="center">
+  <a href="https://github.com/vasanthsreeram/Alvarmethod/stargazers"><img src="https://img.shields.io/github/stars/vasanthsreeram/Alvarmethod?style=flat-square&color=c9a227" alt="stars" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2d6a4f?style=flat-square" alt="MIT" /></a>
+  <a href="https://agentskills.io"><img src="https://img.shields.io/badge/Agent%20Skills-SKILL.md-111827?style=flat-square" alt="Agent Skills" /></a>
+  <a href="https://youtu.be/kzcI5F4tGiU"><img src="https://img.shields.io/badge/method-Eero%20Alvar-b45309?style=flat-square" alt="Eero Alvar" /></a>
+</p>
 
-Works in **Codex**, **Claude Code**, **Grok**, **Pi**, and **OpenCode** (standard `SKILL.md`).
+```bash
+npx skills add vasanthsreeram/Alvarmethod -g --all
+```
+
+That’s the install. Works in **Claude Code**, **Codex**, **Grok**, **Pi**, **OpenCode**, Cursor, and the rest of the [skills CLI](https://skills.sh) agents.
+
+Then open a **learning folder** (not this repo) and say:
+
+```text
+/teach I want a solid introduction to <topic>
+```
+
+You should get a **quiz picker** (not A/B/C/D in chat) → a mermaid DAG → **one** reasoning step → a lock-in quiz.
+
+---
+
+## Quick install
+
+### `npx skills` (preferred)
+
+The [open skills CLI](https://github.com/vercel-labs/skills). Discovers every `skills/*/SKILL.md` in this repo.
+
+```bash
+# global, every detected agent, no prompts
+npx skills add vasanthsreeram/Alvarmethod -g --all
+
+# list what’s in the pack
+npx skills add vasanthsreeram/Alvarmethod --list
+
+# one skill
+npx skills add vasanthsreeram/Alvarmethod --skill teach -g -y
+
+# one harness
+npx skills add vasanthsreeram/Alvarmethod -g -y -a claude-code -a grok -a pi -a opencode -a codex
+```
+
+Update later:
+
+```bash
+npx skills update -g
+```
+
+### `npx` this repo
+
+No extra CLI — runs [`install.sh`](install.sh) from GitHub:
+
+```bash
+npx github:vasanthsreeram/Alvarmethod
+npx github:vasanthsreeram/Alvarmethod --list
+npx github:vasanthsreeram/Alvarmethod --claude --grok
+```
+
+### Clone
+
+```bash
+git clone https://github.com/vasanthsreeram/Alvarmethod.git
+cd Alvarmethod
+./install.sh          # all known agent dirs
+./install.sh --project
+./install.sh --uninstall
+```
+
+| Agent | Global path |
+|-------|-------------|
+| Codex | `~/.codex/skills` + `~/.agents/skills` |
+| Claude Code | `~/.claude/skills` |
+| Grok | `~/.grok/skills` |
+| Pi | `~/.pi/agent/skills` |
+| OpenCode | `~/.config/opencode/skills` |
+
+---
 
 ## The method
 
-Many-to-many learning is leaky:
+Credit: **[Eero Alvar — *How I Use AI to Learn Things*](https://youtu.be/kzcI5F4tGiU)** (2026-08-14). This pack implements that loop as Agent Skills. It is not his original Pi quiz / Obsidian setup. Captions: [`source/eero-alvar-how-i-use-ai-to-learn-things.md`](source/eero-alvar-how-i-use-ai-to-learn-things.md).
+
+Many-to-many learning leaks:
 
 | Direction | Waste |
 |-----------|--------|
 | One outlet → many students | Never fitted to *your* edge |
 | One student → many outlets | Switching cost + the brain hedges on sources it does not trust |
 
-Fix: **one interface, many sources.** Trust is engineered (verify), not hoped for. Struggle stays in the material. The system eats logistics.
+Fix: **one interface, many sources.** Trust is engineered (verify). Struggle stays in the material. The system eats logistics.
 
-Then:
+```mermaid
+flowchart LR
+  A[Probe<br/>edge of this mind] --> B[Plan<br/>mermaid DAG]
+  B --> C[Teach<br/>one node]
+  C --> D[Lock-in quiz]
+  D -->|pass| C
+  D -->|fail| E[Insert prereq]
+  E --> C
+```
 
-1. **Probe** — graded MCQ, start wide, binary-search every strand
-2. **Plan** — mermaid DAG for *this* mind, shown before teaching (so the model cannot wing it)
-3. **Teach** — one reasoning step, picture if needed, quiz to lock in, then the next node
+1. **Probe** — graded MCQ in the harness picker, start wide, binary-search every strand
+2. **Plan** — mermaid DAG for *this* mind, shown *before* teaching
+3. **Teach** — one reasoning step, picture if needed, quiz, next node
+
+---
 
 ## Skills
 
@@ -29,71 +121,22 @@ Then:
 |-------|-----|
 | `teach` | Full loop: probe → plan → one-step teaching |
 | `probe` | Understanding map only |
-| `learn-profile` | Write `.alvar/LEARNER.md` (how you want to be taught) |
+| `learn-profile` | Write `.alvar/LEARNER.md` |
 | `learn-visual` | One SVG, look at it, fix it |
 | `learn-verify` | Fact-check a claim before it is taught as fact |
 
-## Install
+Quizzes **must** use the native picker:
 
-```bash
-git clone git@github.com:vasanthsreeram/Alvarmethod.git
-cd Alvarmethod
-chmod +x install.sh
-./install.sh
-```
-
-That copies the five skills into:
-
-| Agent | Global path |
-|-------|-------------|
-| Codex | `~/.codex/skills` and `~/.agents/skills` |
-| Claude Code | `~/.claude/skills` |
-| Grok | `~/.grok/skills` |
-| Pi | `~/.pi/agent/skills` |
-| OpenCode | `~/.config/opencode/skills` |
-
-Project-only:
-
-```bash
-cd /path/to/your/learning-folder
-/path/to/Alvarmethod/install.sh --project
-```
-
-One harness:
-
-```bash
-./install.sh --claude
-./install.sh --grok --pi
-```
-
-Remove copies (this repo stays):
-
-```bash
-./install.sh --uninstall
-```
-
-## Try it
-
-Open a **learning folder** (not this repo). Stronger models teach this better.
-
-```text
-/learn-profile
-/teach I want a solid introduction to <topic>
-```
-
-Same thing in chat: “Teach me X. Probe first.”
-
-You should get: a few MCQs **in the harness quiz UI** (not letters in chat) → a mermaid plan → **one** step → a quiz on that step. If the agent dumps a textbook chapter, stop it and say “one node only.” If it pastes A/B/C/D instead of opening the picker, the skill is being ignored — say “use the quiz tool.”
-
-| Agent | Quiz tool |
-|-------|-----------|
-| Grok | `ask_user_question` |
+| Agent | Tool |
+|-------|------|
+| Grok / Codex | `ask_user_question` |
 | Claude Code | `AskUserQuestion` |
-| Codex | `ask_user_question` |
 | OpenCode | `question` |
 | Pi | `quiz` / `ask_user` / `askUserQuestion` |
 
-Files it writes:
+If the agent pastes A/B/C/D, say **“use the quiz tool.”** If it dumps a textbook, say **“one node only.”**
+
+Session files land in the learning folder:
 
 ```text
 .alvar/LEARNER.md
@@ -102,15 +145,13 @@ Files it writes:
 .alvar/visuals/…
 ```
 
-Commands if your agent uses them: `/teach`, `/probe`, `/skill:teach` (Pi), or the Skills menu.
+Point Obsidian at `.alvar/` if you want LaTeX preview.
 
-## Not in this pack
-
-Eero’s demo also used Pi-only quiz + markdown-log extensions and Obsidian as the UI. Here, quizzes are in the chat and the log is `.alvar/sessions/`. Point Obsidian at that folder if you want LaTeX preview.
+---
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Edit skills in this repo, then `./install.sh` — don’t patch the copies under `~/.claude` / `~/.grok`.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Edit skills **here**, then reinstall. Don’t patch the copies under `~/.claude` / `~/.grok`.
 
 ## License
 
