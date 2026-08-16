@@ -1,0 +1,5 @@
+.DS_Store
+.alvar/
+*.bak
+.idea/
+.vscode/
