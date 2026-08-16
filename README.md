@@ -108,6 +108,10 @@ Commands if your agent uses them: `/teach`, `/probe`, `/skill:teach` (Pi), or th
 
 Eero’s demo also used Pi-only quiz + markdown-log extensions and Obsidian as the UI. Here, quizzes are in the chat and the log is `.alvar/sessions/`. Point Obsidian at that folder if you want LaTeX preview.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Edit skills in this repo, then `./install.sh` — don’t patch the copies under `~/.claude` / `~/.grok`.
+
 ## License
 
 MIT for the skills, installer, and docs.
