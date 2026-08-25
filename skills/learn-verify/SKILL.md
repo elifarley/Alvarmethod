@@ -4,7 +4,7 @@ description: >
   Fact-check a teaching claim against sources so the learner can trust the
   single interface. Use when the user runs /learn-verify or /skill:learn-verify,
   or says fact-check, verify this, is this true, source this, don't hallucinate,
-  or when a teach/plan step needs a claim checked before it is taught as fact.
+  or when an alvar-learn plan step needs a claim checked before it is taught as fact.
 license: MIT
 metadata:
   author: vasanthsreeram
@@ -56,4 +56,4 @@ confirmed | qualified | contradicted | unknown
 
 - No invented papers, quotes, or page numbers.
 - One claim per run. Batch only if they are the same fact in different words.
-- Write the verdict into the session file if a teach session is open.
+- Write the verdict into the session file if an alvar-learn session is open.

@@ -24,8 +24,8 @@ Credit stays with **[Eero Alvar — How I Use AI to Learn Things](https://youtu.
 
 ## Ground rules
 
-1. **One home per fact.** Philosophy lives in `skills/teach/references/philosophy.md`. Process in `process.md`. Quiz tools in `quiz-ui.md`. Point at those files; don’t restate them.
-2. **Native quiz UI only.** Probe and lock-in quizzes must call the harness tool (`ask_user_question`, `AskUserQuestion`, `question`, Pi `quiz` / `ask_user`). Never paste A/B/C/D in chat. Details: [`skills/teach/references/quiz-ui.md`](skills/teach/references/quiz-ui.md).
+1. **One home per fact.** Philosophy lives in `skills/alvar-learn/references/philosophy.md`. Process in `process.md`. Quiz tools in `quiz-ui.md`. Point at those files; don’t restate them.
+2. **Native quiz UI only.** Probe and lock-in quizzes must call the harness tool (`ask_user_question`, `AskUserQuestion`, `question`, Pi `quiz` / `ask_user`). Never paste A/B/C/D in chat. Details: [`skills/alvar-learn/references/quiz-ui.md`](skills/alvar-learn/references/quiz-ui.md).
 3. **Do not leak the answer.** No `(Recommended)` on the right option. No “correct choice first.”
 4. **Struggle stays in the material.** Skills absorb logistics (order, files, verify, diagrams).
 5. **Portable `SKILL.md`.** [Agent Skills](https://agentskills.io/specification) frontmatter only: `name`, `description`, optional `license` / `metadata`. `name` must match the folder. `description` ≤ 1024 chars and must include trigger phrases.
@@ -35,7 +35,7 @@ Credit stays with **[Eero Alvar — How I Use AI to Learn Things](https://youtu.
 
 ```text
 skills/<name>/SKILL.md     # what agents load
-skills/teach/references/   # shared method (philosophy, process, quiz UI, files)
+skills/alvar-learn/references/   # shared method (philosophy, process, quiz UI, files)
 skills/*/assets/           # templates the skill writes
 install.sh                 # copies skills into harness dirs
 source/                    # credited transcript
@@ -54,7 +54,7 @@ cd Alvarmethod
 ./install.sh                 # or --project / --claude / --grok …
 ```
 
-Then open a **learning folder** (not this repo) and run `/teach` or “teach me X.” Check:
+Then open a **learning folder** (not this repo) and run `/alvar-learn` or “teach me X.” Check:
 
 - [ ] Quiz picker opens (not letters in the transcript)
 - [ ] Probe writes `.alvar/maps/<topic>.md`
@@ -101,7 +101,7 @@ Don’t commit anything under a contributor’s `~/.claude` or `.alvar/`.
 ### PR checklist
 
 - [ ] `name` matches folder; description has triggers
-- [ ] Quiz path still goes through [quiz-ui.md](skills/teach/references/quiz-ui.md)
+- [ ] Quiz path still goes through [quiz-ui.md](skills/alvar-learn/references/quiz-ui.md)
 - [ ] `./install.sh --list` is still right
 - [ ] README / installer updated if you added a skill or path
 - [ ] Eero credit intact

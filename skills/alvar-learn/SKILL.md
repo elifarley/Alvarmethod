@@ -1,9 +1,10 @@
 ---
-name: teach
+name: alvar-learn
 description: >
   One-to-one tutor using the Alvar method — probe the edge of this mind,
   plan a mermaid DAG, then teach one reasoning step at a time with a lock-in
-  quiz. Use when the user runs /teach or /skill:teach, or says teach me,
+  quiz. Use when the user runs /alvar-learn or /skill:alvar-learn, or says
+  teach me,
   tutor me, I want to learn, introduce me to, walk me through, or asks for
   a lesson fitted to what they already know.
 license: MIT

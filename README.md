@@ -23,7 +23,7 @@ That’s the install. Works in **Claude Code**, **Codex**, **Grok**, **Pi**, **O
 Then open a **learning folder** (not this repo) and say:
 
 ```text
-/teach I want a solid introduction to <topic>
+/alvar-learn I want a solid introduction to <topic>
 ```
 
 You should get a **quiz picker** (not A/B/C/D in chat) → a mermaid DAG → **one** reasoning step → a lock-in quiz.
@@ -44,7 +44,7 @@ npx skills add vasanthsreeram/Alvarmethod -g --all
 npx skills add vasanthsreeram/Alvarmethod --list
 
 # one skill
-npx skills add vasanthsreeram/Alvarmethod --skill teach -g -y
+npx skills add vasanthsreeram/Alvarmethod --skill alvar-learn -g -y
 
 # one harness
 npx skills add vasanthsreeram/Alvarmethod -g -y -a claude-code -a grok -a pi -a opencode -a codex
@@ -119,7 +119,7 @@ flowchart LR
 
 | Skill | Job |
 |-------|-----|
-| `teach` | Full loop: probe → plan → one-step teaching |
+| `alvar-learn` | Full loop: probe → plan → one-step teaching |
 | `probe` | Understanding map only |
 | `learn-profile` | Write `.alvar/LEARNER.md` |
 | `learn-visual` | One SVG, look at it, fix it |

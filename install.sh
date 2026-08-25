@@ -4,7 +4,10 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 SKILLS_SRC="$ROOT/skills"
-SKILLS=(teach probe learn-visual learn-verify learn-profile)
+SKILLS=(alvar-learn probe learn-visual learn-verify learn-profile)
+# Pre-rename name of alvar-learn; removed from targets so a stale copy can't
+# keep answering to /teach after the rename.
+LEGACY_SKILLS=(teach)
 
 usage() {
   cat <<'EOF'
@@ -92,6 +95,12 @@ copied=0
 removed=0
 while IFS= read -r dest; do
   [[ -z "$dest" ]] && continue
+  for name in "${LEGACY_SKILLS[@]}"; do
+    if [[ -e "$dest/$name" || -L "$dest/$name" ]]; then
+      rm -rf "$dest/$name"
+      echo "removed stale $dest/$name (renamed to ${SKILLS[0]})"
+    fi
+  done
   if [[ "$DO_UNINSTALL" -eq 1 ]]; then
     for name in "${SKILLS[@]}"; do
       if [[ -e "$dest/$name" || -L "$dest/$name" ]]; then
@@ -115,5 +124,5 @@ if [[ "$DO_UNINSTALL" -eq 1 ]]; then
   echo "done. removed $removed skill dirs."
 else
   echo "done. installed $copied skill dirs."
-  echo "Open a learning folder (not this repo) and run /teach or ask to be taught something."
+  echo "Open a learning folder (not this repo) and run /alvar-learn or ask to be taught something."
 fi
