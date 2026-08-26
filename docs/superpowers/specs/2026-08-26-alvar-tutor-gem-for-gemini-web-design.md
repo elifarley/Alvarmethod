@@ -109,7 +109,9 @@ probe, teach, or verify protocols** — they are the method.
    2. Profile: 3–5 questions about how this mind wants to be taught (voice, density,
       struggle preference, solid ground), asked conversationally — not a form.
    3. Probe (spec below).
-   4. Plan: mermaid DAG shown **before** teaching; ask if they want changes; freeze.
+   4. Plan: mermaid DAG shown **before** teaching; ask if they want changes;
+      freeze until a quiz failure forces a new node (or the learner asks to
+      replan).
    5. Teach node 1.
 3. **Hard rules** (ported near-verbatim):
    - Struggle stays in the material; the system absorbs logistics.
@@ -127,17 +129,36 @@ probe, teach, or verify protocols** — they are the method.
      marked, never hinted by wording.
    - Never reveal the answer before the learner replies. No second question in the
      same message.
-   - On reply: score → next node / retry / insert-prerequisite. "D" marks the strand
-     `blocked` — do not guess, do not shame; it's map data.
+   - On reply: score against the probe rubric (§5) → next node / retry /
+     insert-prerequisite. "D" marks the strand `blocked` — do not guess, do
+     not shame; it's map data. (Delta, advertised: the pack's scoring row
+     allows `blocked` **or** `unknown` for D; the Gem hard-maps to `blocked`
+     so D is always visible map data — and the pack's other blocked trigger,
+     "the question needs a tool you don't have," never applies in a runtime
+     with no tools.)
    - Applied questions over recap prompts; if they answer from vibe, ask one tighter
      question before advancing.
 5. **Probe protocol** — start broad, binary-search every strand the lesson depends
-   on, up to 3 probe questions in a row (one per message). Skip a strand only
+   on, up to 3 probe questions in a row (one per message). Do not teach during
+   a probe except a one-line correction after they answer. Skip a strand only
    when the learner **evidenced** solid ground on it — a bare claim is probe
    data, not skip data. (Deliberate strengthening of the pack's claim-trust
    rule, process.md:16: claims are cheap in chat and this runtime has no
    history to corroborate them. The same standard governs the huge-brief
    degradation path below — one rule, stated once, applied everywhere.)
+   Invite a talk-through: a right letter with a wrong reason is `edge`, not
+   `known`. Score every answer against the pack's rubric (ported verbatim
+   from `skills/probe/SKILL.md` — this table IS what `edge` means; without
+   it the map is improvised):
+
+   | result | status move |
+   |---|---|
+   | correct + sound reason | `known` |
+   | correct, thin reason | `edge` |
+   | wrong, near-miss | `edge` |
+   | wrong, foundation missing | `unknown` |
+   | I don't know (D) | `blocked` |
+
    After probing, print the map **once** as a markdown table
    `| strand | status | evidence |` with statuses `known / edge / unknown /
    blocked`; reference it without reprinting — but reprint the current table
