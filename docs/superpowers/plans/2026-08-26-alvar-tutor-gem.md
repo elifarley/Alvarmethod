@@ -14,7 +14,7 @@
 
 ## Shared conventions (read once, apply everywhere)
 
-**Knowledge-file header** — every `knowledge/*.md` starts with this block, filled in (the `@ <sha>` pin is the **branch HEAD SHA at port time**, from `hug sl` — never left as a placeholder; `<rows>` = that file's adaptation list, one row per clause):
+**Knowledge-file header** — every `knowledge/*.md` starts with this block, filled in. The `@ <sha>` pin is the **single source-baseline SHA, captured ONCE** (see Task 1 Step 3) and reused verbatim by all five ports — never re-derived per task: each port task commits its file, so a fresh HEAD per task would produce five different pins and fail Task 8's same-SHA check **by construction**. `<rows>` = that file's adaptation list, one row per clause:
 
 ```
 <!-- Source of truth: <repo-relative source path> @ <sha>
@@ -163,7 +163,7 @@ Redirect non-learning requests back, gently.
 ```
 
 - [ ] **Step 2: Run the Verify block** — all receipts pass (`wc -m` first; if over 4000, cut visuals detail → session-end wording, never a rule).
-- [ ] **Step 3: Commit** — `hug a gems/alvar-tutor/INSTRUCTIONS.md && hug c` with message `feat(gem): INSTRUCTIONS.md — self-sufficient operating manual (<=4k chars)`.
+- [ ] **Step 3: Commit** — `hug a gems/alvar-tutor/INSTRUCTIONS.md && hug c` with message `feat(gem): INSTRUCTIONS.md — self-sufficient operating manual (<=4k chars)` **plus a trailer line `source-pin: <sha>`, where `<sha>` is the short HEAD SHA from `hug sl` at this moment**. This one SHA is the source baseline every knowledge-file header (Tasks 2–5) reuses verbatim — it is the reproducible "commit being ported from" for the whole port, and Task 8 validates all five pins against it.
 
 ---
 
@@ -186,7 +186,7 @@ diff <(sed -n '/-->/,$p' gems/alvar-tutor/knowledge/philosophy.md | tail -n +2 |
 ```
 
 **Steps:**
-- [ ] **Step 1:** `hug sl` → note HEAD short SHA. Write the file: header block (conventions above) with source path `skills/alvar-learn/references/philosophy.md`, the SHA, adaptation row `- ports verbatim (no runtime references in source)`, then a blank line, then the source file's content copied exactly.
+- [ ] **Step 1:** Write the file: header block (conventions above) with source path `skills/alvar-learn/references/philosophy.md`, the **source-baseline SHA recorded in Task 1's `source-pin:` trailer** (do NOT take a fresh `hug sl`), adaptation row `- ports verbatim (no runtime references in source)`, then a blank line, then the source file's content copied exactly.
 - [ ] **Step 2:** Run the Verify diff — empty.
 - [ ] **Step 3:** Commit — `feat(gem): knowledge/philosophy.md — verbatim port + source pin`.
 
@@ -223,7 +223,7 @@ sed -n '/-->/,$p' gems/alvar-tutor/knowledge/process.md | tail -n +2 | \
 8. `learn-verify` reference → "the verify rule (see instructions), when the domain is empirical, historical, or you are unsure" (trigger conditions carried through).
 
 **Steps:**
-- [ ] **Step 1:** Write header (SHA from `hug sl`) with the 8 rows; port the body applying each row to its clause.
+- [ ] **Step 1:** Write header with the **Task 1 `source-pin:` SHA** (never a fresh `hug sl`) and the 8 rows; port the body applying each row to its clause.
 - [ ] **Step 2:** Run the Verify body-scan — no output.
 - [ ] **Step 3:** Commit — `feat(gem): knowledge/process.md — process ported under the 8-row adaptation`.
 
@@ -302,7 +302,7 @@ grep -c 'arrow' gems/alvar-tutor/knowledge/visual.md            # ≥ 2 (design 
 4. Everything else ports unchanged (frontmatter dropped as above).
 
 **Steps:**
-- [ ] **Step 1:** Write both files (headers with SHA + rows; bodies per rows).
+- [ ] **Step 1:** Write both files (headers carrying the **Task 1 `source-pin:` SHA** + rows; bodies per rows).
 - [ ] **Step 2:** Run all four Verify receipts.
 - [ ] **Step 3:** Commit — `feat(gem): knowledge/verify.md + visual.md — satellite protocols ported`.
 
@@ -377,7 +377,7 @@ grep -c 'gems/' CONTRIBUTING.md                            # ≥ 3 (port line + 
 - [ ] Every knowledge file's body-scans from Tasks 2–5 still clean (re-run all five)
 - [ ] `wc -m INSTRUCTIONS.md` still ≤ 4000
 - [ ] No cadence/number appears in both INSTRUCTIONS.md and a knowledge file with conflicting values (`grep -n 'questions'` across all six files; every hit must agree or point)
-- [ ] The header pins in all 5 knowledge files name the same SHA
+- [ ] The header pins in all 5 knowledge files name the same SHA — exactly the `source-pin:` value recorded in Task 1's commit message
 - [ ] Spec §knowledge adaptation rows ↔ shipped headers: row-for-row identical
 
 **Verify:**
