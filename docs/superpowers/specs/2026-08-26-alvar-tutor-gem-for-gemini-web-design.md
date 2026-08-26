@@ -17,7 +17,7 @@ knowledge files — no `Skill` tool, no filesystem, no native question UI.
 | Constraint | Value | Consequence |
 |---|---|---|
 | Knowledge files | max **10** | 5 files used, 5 spare; no pressure |
-| Instruction length | no official cap published; community reports vary (~4k to 100k+ chars) | keep instructions compact (~600–900 words); depth goes to knowledge files |
+| Instruction length | no official cap published; community reports vary (~4k to 100k+ chars) | instructions ≤ ~4k chars, measured (~550–650 words); depth goes to knowledge files |
 | Knowledge file loading | RAG-indexed, pulled when relevant — **not** guaranteed every turn | instructions must be self-sufficient for the core loop |
 | Mermaid | not rendered in Gemini chat (shows raw code) | plan ships as mermaid **code block** (user-accepted) |
 | Filesystem | none | no `.alvar/` state; chat history is the only memory |
@@ -100,15 +100,16 @@ Because knowledge files are retrieval-indexed (not guaranteed every turn):
 
 ## INSTRUCTIONS.md — behavioral contract
 
-Structure (target ~550–650 words, **≤ ~4k characters — measure the char
-count before pasting**; the pessimistic report caps the box at ~4k, and
-600 words ≈ 4.2k chars already breaches it). If over budget, cut in this
-order: visuals rule → session-end summary → scope guard — the scope guard
-**last**, because it is the truncation canary: deleting it first destroys
-the only detector of the silent-truncation failure mode. If it must go,
-re-key the canary checklist item to the new final section. **Never cut
-the quiz, probe (including the scoring rubric), teach, or verify
-protocols** — they are the method.
+Structure (target ~550–650 words, **≤ ~4k characters — gate with
+`wc -m gems/alvar-tutor/INSTRUCTIONS.md` before pasting**; the pessimistic
+report caps the box at ~4k, and 600 words ≈ 4.2k chars already breaches
+it). If over budget, cut in this order: visuals rule → session-end
+summary → scope guard — the scope guard **last**, because it is the
+truncation canary: deleting it first destroys the only detector of the
+silent-truncation failure mode. If it must go, re-key the canary
+checklist item to the new final section. **Never cut the quiz, probe
+(including the scoring rubric), teach, or verify protocols** — they are
+the method.
 
 1. **Persona** — "You are one teacher for one mind. Not a course. Not a survey."
    Ported from `alvar-learn/SKILL.md`.
@@ -154,7 +155,10 @@ protocols** — they are the method.
    on, up to 3 probe questions in a row (one per message). Do not teach during
    a probe except a one-line correction after they answer. Skip a strand only
    when the learner **evidenced** solid ground on it — a bare claim is probe
-   data, not skip data. (Deliberate strengthening of the pack's claim-trust
+   data, not skip data. Operational test for "evidenced": the material shows
+   work on that strand — a derivation, a correct usage, a solved problem —
+   and you can name it in one sentence; otherwise probe the strand anyway.
+   (Deliberate strengthening of the pack's claim-trust
    rule, process.md:16: claims are cheap in chat and this runtime has no
    history to corroborate them. The same standard governs the huge-brief
    degradation path below — one rule, stated once, applied everywhere.)
@@ -392,7 +396,10 @@ themselves, and a clause the lists miss is still caught by its class:
          catches silent instruction-box truncation, which fails like a missing
          feature with no error anywhere. Precondition: valid while the scope
          guard is present; if it was cut for budget, re-key this item to the
-         new final section
+         new final section. Blind spot: detects tail truncation only — a
+         mid-section cut inside a never-cut protocol leaves no signal; the
+         protocol items above (quiz shape, one-step, verdicts) are the
+         compensating control
 
 ## Error handling & degradation
 
