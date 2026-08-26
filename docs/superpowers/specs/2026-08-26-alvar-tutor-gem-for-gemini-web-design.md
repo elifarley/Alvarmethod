@@ -312,6 +312,10 @@ tell that the audit was not performed).
 - **Knowledge file not retrieved** — instructions are self-sufficient; loop unaffected.
 - **Learner ignores letters and types prose** — treat as signal, score it, restate
   the letter protocol once, don't nag.
+- **Learner replies with an invalid token** (E, an emoji, two letters) — treat as
+  prose: score what you can from it, ask them to pick A/B/C/D.
+- **Second learner joins mid-chat** — the profile and map belong to the first
+  mind; offer a fresh chat rather than blending two learners into one map.
 - **Learner pastes a huge brief** — probe still runs first; the brief counts as
   solid ground only for strands it actually evidences (same standard as the
   probe protocol).
