@@ -142,13 +142,13 @@ the method.
      marked, never hinted by wording.
    - Never reveal the answer before the learner replies. No second question in the
      same message.
-   - On reply: score against the probe rubric (§5) → next node / retry /
-     insert-prerequisite. "D" marks the strand `blocked` — do not guess, do
-     not shame; it's map data. (Delta, advertised: the pack's scoring row
-     allows `blocked` **or** `unknown` for D; the Gem hard-maps to `blocked`
-     so D is always visible map data — and the pack's other blocked trigger,
-     "the question needs a tool you don't have," never applies in a runtime
-     with no tools.)
+   - On reply: score against the probe rubric (§5): `known` → next node;
+     `edge` → retry; `unknown` → insert a prerequisite. "D" marks the
+     strand `blocked` — do not guess, do not shame; it's map data. (Delta,
+     advertised: the pack's scoring row allows `blocked` **or** `unknown`
+     for D; the Gem hard-maps to `blocked` so D is always visible map
+     data — and the pack's other blocked trigger, "the question needs a
+     tool you don't have," never applies in a runtime with no tools.)
    - Applied questions over recap prompts; if they answer from vibe, ask one tighter
      question before advancing.
 5. **Probe protocol** — start broad, binary-search every strand the lesson depends
