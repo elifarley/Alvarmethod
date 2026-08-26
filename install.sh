@@ -97,8 +97,16 @@ while IFS= read -r dest; do
   [[ -z "$dest" ]] && continue
   for name in "${LEGACY_SKILLS[@]}"; do
     if [[ -e "$dest/$name" || -L "$dest/$name" ]]; then
-      rm -rf "$dest/$name"
-      echo "removed stale $dest/$name (renamed to ${SKILLS[0]})"
+      # Data safety: only remove copies provably ours. Every Alvarmethod
+      # SKILL.md carries the Eero Alvar source link in its frontmatter; a
+      # `teach` dir without it belongs to another package (or predates the
+      # pack) and stays in place with a warning instead of being destroyed.
+      if [[ -f "$dest/$name/SKILL.md" ]] && grep -q 'kzcI5F4tGiU' "$dest/$name/SKILL.md"; then
+        rm -rf "$dest/$name"
+        echo "removed stale $dest/$name (renamed to ${SKILLS[0]})"
+      else
+        echo "WARNING: keeping $dest/$name — not recognized as an Alvarmethod copy; remove it manually if it is yours" >&2
+      fi
     fi
   done
   if [[ "$DO_UNINSTALL" -eq 1 ]]; then
