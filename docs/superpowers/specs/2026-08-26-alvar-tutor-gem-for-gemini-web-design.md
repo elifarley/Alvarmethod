@@ -125,28 +125,82 @@ Structure (target ~600–900 words):
     with a short example. Refuse nothing in the learning domain; gently redirect
     non-learning requests back.
 
+### Repudiation: the pack's harness-era quiz rules do not carry over
+
+`quiz-ui.md`'s "Never dump A/B/C/D in chat" and `process.md`'s "Wait for the
+tool" exist because CLI harnesses **have** a native question tool — pasting
+letters there degrades a better available mechanism. Gemini web chat has no
+such tool; the chat letter protocol (decision 3) is not a tolerated fallback
+but the sanctioned substitute, chosen at design time. Every port must
+therefore **delete** those clauses, not preserve them: knowledge files are
+RAG-surfaced mid-session, so a knowledge file that forbids letters while the
+instructions mandate them makes the core interaction a per-retrieval coin
+flip. If Gemini ever ships a native question tool, revisit decision 3 and
+re-port.
+
 ## knowledge/ files
 
-Each file starts with a header block (HTML comment, invisible in rendered preview):
+Each file starts with a header block (HTML comment, invisible in rendered
+preview). The header carries its **own** source path (not a shared example),
+the source commit pin **filled at port time** with the actual SHA being
+ported from — never left as a placeholder — and the per-file adaptation
+list, so the re-port ritual is mechanical instead of re-derived:
 
 ```
-<!-- Source of truth: skills/alvar-learn/references/philosophy.md @ <commit>
-     Ported: 2026-08-26. Do not edit here — edit the source, then port.
+<!-- Source of truth: <this file's source path> @ <source commit SHA>
+     Ported: 2026-08-26. Do not edit here — edit the source, then re-apply
+     the adaptation list below.
+     Adaptations:
+     - <one line per clause-level change>
      Gem: alvar-tutor (Gemini web) -->
 ```
 
-- **philosophy.md** — near-verbatim port of `references/philosophy.md` (36 lines;
-  only mechanical changes: remove CLI-harness references).
-- **process.md** — port of `references/process.md` with these adaptations:
-  - "harness quiz UI" → chat letter protocol (summary + pointer to instructions).
-  - `.alvar/maps/<topic>.md` writes → "print the map once in chat".
+The adaptation lists below are the durable contract. They are exhaustive and
+clause-level: executing them verbatim must never leave a runtime-impossible
+instruction in a knowledge file. Anything not listed ports byte-identical —
+and each list was produced by reading the source file line-by-line against
+the runtime, so every entry corresponds to a real clause (a no-op entry is a
+tell that the audit was not performed).
+
+- **philosophy.md** — ports **verbatim**. The 36-line source contains zero
+  runtime references (no harness, tool, `.alvar/`, or skill mentions; its
+  only external reference is the youtu.be citation). Adaptation list: empty.
+- **process.md** — port of `references/process.md` with these clause-level
+  adaptations:
+  - Phase 1 quiz bullet — replace the whole clause with: "Use graded
+    multiple-choice (include 'I don't know') through the chat letter
+    protocol (see instructions). One question per message." This deletes the
+    source's "Never dump A/B/C/D in chat" (see the repudiation above).
+  - Phase 1 "Ask 1–3 questions at a time. Wait for the tool." → "Ask up to
+    3 probe questions in a row, one message each, pausing for each reply."
+    (No tool exists to wait for.)
+  - `quiz-ui.md` pointer → deleted (no such file in the Gem).
+  - `.alvar/maps/<topic>.md` writes → "print the map once in chat" (the
+    probe protocol in the instructions carries the reprint rule).
   - `.alvar/sessions/…` writes → "the chat transcript is the session log".
-  - `learn-visual` reference → SVG-code-offer rule.
-  - `learn-verify` reference → Google Search grounding rule.
+  - `learn-visual` reference → the visuals rule (see instructions).
+  - `learn-verify` reference → the verify rule (see instructions), carrying
+    the source's trigger conditions through the substitution: "when the
+    domain is empirical, historical, or you are unsure". The unconditional
+    form would flatten the trigger and silently verify nothing or everything.
 - **learner-profile.md** — merged from `skills/learn-profile/SKILL.md` +
-  `templates/LEARNER.md`: the interview questions, what the profile controls
-  (voice/density/struggle/solid ground/visual-LaTeX preferences), and "do not
-  invent a personality".
+  `skills/learn-profile/assets/LEARNER.md` (the **assets** copy is
+  authoritative for porting; `templates/LEARNER.md` is the human-facing
+  variant and differs at line 3). Adaptations:
+  - "2–3 questions per turn, through the harness quiz UI in
+    ../alvar-learn/references/quiz-ui.md — not as a markdown list" →
+    "2–3 questions per turn, conversationally — not as a markdown form"
+    (profiling is an interview, not a graded quiz; no letters here).
+  - "Create `.alvar/LEARNER.md` from assets/LEARNER.md" → "hold the profile
+    in this chat's history; restate it in one line when the interview ends".
+  - "If a file already exists, show a diff of proposed edits and wait" →
+    deleted (no filesystem).
+  - "Tell them `alvar-learn` will read it every session" → "Tell them the
+    profile lives only in this chat; a new chat starts fresh" (the source
+    line is false in the Gem runtime).
+  - Keep unchanged: the six interview clusters (solid ground, goal, pace,
+    struggle, voice, artifacts), "Use their words where you can", "Do not
+    invent hobbies or a persona".
 
 ## README.md (gems/alvar-tutor/)
 
