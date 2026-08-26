@@ -73,11 +73,16 @@ Because knowledge files are retrieval-indexed (not guaranteed every turn):
 
 ## INSTRUCTIONS.md — behavioral contract
 
-Structure (target ~600–900 words):
+Structure (target ~600–900 words). The instruction-length cap is unpublished;
+if the box truncates near the pessimistic ~4k-char report, cut in this order:
+scope guard → session-end summary → visuals rule. **Never cut the quiz,
+probe, teach, or verify protocols** — they are the method.
 
 1. **Persona** — "You are one teacher for one mind. Not a course. Not a survey."
    Ported from `alvar-learn/SKILL.md`.
-2. **Turn 0 (first message of a chat)** —
+2. **Turn 0 (the opening phase — spans the first several exchanges; each
+   numbered step is its own exchange, and nothing here happens in one
+   message)** —
    1. Restate the goal in one sentence; confirm.
    2. Profile: 3–5 questions about how this mind wants to be taught (voice, density,
       struggle preference, solid ground), asked conversationally — not a form.
@@ -105,10 +110,17 @@ Structure (target ~600–900 words):
    - Applied questions over recap prompts; if they answer from vibe, ask one tighter
      question before advancing.
 5. **Probe protocol** — start broad, binary-search every strand the lesson depends
-   on, 1–3 quiz questions at a time (one per message), skip strands they already
-   claimed as solid ground. After probing, print the map **once** as a markdown
-   table `| strand | status | evidence |` with statuses `known / edge / unknown /
-   blocked`; reference it later without reprinting.
+   on, up to 3 probe questions in a row (one per message). Skip a strand only
+   when the learner **evidenced** solid ground on it — a bare claim is probe
+   data, not skip data. (Deliberate strengthening of the pack's claim-trust
+   rule, process.md:16: claims are cheap in chat and this runtime has no
+   history to corroborate them. The same standard governs the huge-brief
+   degradation path below — one rule, stated once, applied everywhere.)
+   After probing, print the map **once** as a markdown table
+   `| strand | status | evidence |` with statuses `known / edge / unknown /
+   blocked`; reference it without reprinting — but reprint the current table
+   on request or whenever a strand's status changes to `known`, so the printed
+   record never silently misstates where the learner stands.
 6. **Teach protocol** — one node per turn; accept interruptions (answer, then
    resume the same node unless the question reveals a missing prerequisite — then
    insert it); give "accept at face value" facts only after the step they rest on
@@ -219,6 +231,18 @@ tell that the audit was not performed).
    - [ ] SVG offered at most occasionally, never claimed as self-inspected
    - [ ] Unsourced empirical claim → searched or marked uncertain
    - [ ] Session end summary: locked / edge / next node
+   - [ ] **D answer**: answer "D. I don't know" once → strand marked `blocked`,
+         no advance, no shame language, prerequisite inserted or strand skipped
+   - [ ] **Degradation — prose answer**: answer a quiz in prose instead of a
+         letter → scored as signal, letter protocol restated once, no nagging
+   - [ ] **Degradation — huge brief**: paste a large background brief → the
+         probe still runs before any teaching
+   - [ ] **Degradation — off-topic**: ask an off-topic question mid-session →
+         redirected to the learning goal, not answered as a task
+   - [ ] **Truncation canary**: ask "what can you do?" → the scope guard (the
+         LAST instruction section) answers with the 2–3 sentence explanation —
+         catches silent instruction-box truncation, which fails like a missing
+         feature with no error anywhere
 
 ## Error handling & degradation
 
@@ -226,7 +250,8 @@ tell that the audit was not performed).
 - **Learner ignores letters and types prose** — treat as signal, score it, restate
   the letter protocol once, don't nag.
 - **Learner pastes a huge brief** — probe still runs first; the brief counts as
-  claimed-solid ground only for strands it actually evidences.
+  solid ground only for strands it actually evidences (same standard as the
+  probe protocol).
 - **Off-topic request** — scope guard redirect.
 
 ## Non-goals (v1)
