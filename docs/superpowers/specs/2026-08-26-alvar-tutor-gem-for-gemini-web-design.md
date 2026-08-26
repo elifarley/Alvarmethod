@@ -16,7 +16,7 @@ knowledge files — no `Skill` tool, no filesystem, no native question UI.
 
 | Constraint | Value | Consequence |
 |---|---|---|
-| Knowledge files | max **10** | 3 files fit trivially; no pressure |
+| Knowledge files | max **10** | 5 files used, 5 spare; no pressure |
 | Instruction length | no official cap published; community reports vary (~4k to 100k+ chars) | keep instructions compact (~600–900 words); depth goes to knowledge files |
 | Knowledge file loading | RAG-indexed, pulled when relevant — **not** guaranteed every turn | instructions must be self-sufficient for the core loop |
 | Mermaid | not rendered in Gemini chat (shows raw code) | plan ships as mermaid **code block** (user-accepted) |
@@ -29,8 +29,11 @@ knowledge files — no `Skill` tool, no filesystem, no native question UI.
 1. **Audience: shareable with anyone.** No baked-in LEARNER.md; the Gem profiles the
    learner at runtime (3–5 questions woven into first-chat Turn 0).
 2. **Scope: full loop.** Probe → plan (DAG) → teach one node → lock-in quiz, plus
-   runtime profiling and verification. (`probe`, `learn-profile`, `learn-verify`,
-   `learn-visual` all fold in as inline protocols.)
+   runtime profiling and verification. The satellites fold in without loss:
+   `probe`'s protocol into the instructions; `learn-profile` into the Turn 0
+   interview + `knowledge/learner-profile.md`; `learn-verify` into the verify
+   rule + `knowledge/verify.md`; `learn-visual` into the visuals rule +
+   `knowledge/visual.md`.
 3. **Quiz UI: chat letter protocol.** Gemini web has no question tool; the closest
    faithful substitute is a constrained chat exchange (spec below).
 4. **State: chat history only.** No export/resume ritual, no downloadable state
@@ -50,17 +53,36 @@ knowledge files — no `Skill` tool, no filesystem, no native question UI.
 gems/alvar-tutor/
   INSTRUCTIONS.md          # the Gem instruction text — paste into the Gem's instruction box
   knowledge/
-    philosophy.md          # near-verbatim port of skills/alvar-learn/references/philosophy.md
+    philosophy.md          # verbatim port of skills/alvar-learn/references/philosophy.md
     process.md             # adapted port of skills/alvar-learn/references/process.md
-    learner-profile.md     # from skills/learn-profile/SKILL.md + templates/LEARNER.md
+    learner-profile.md     # from skills/learn-profile/SKILL.md + assets/LEARNER.md
+    verify.md              # adapted port of skills/learn-verify/SKILL.md
+    visual.md              # adapted port of skills/learn-visual/SKILL.md
   README.md                # Gem creation steps + smoke-test checklist
 ```
 
-Plus:
+Plus (all in the same PR as the Gem, so no shipped surface contradicts another):
 - One new section in the repo root `README.md` ("Gemini web (Gem)") pointing to
   `gems/alvar-tutor/`.
-- One line in `CONTRIBUTING.md`: `skills/` is the source of truth; edit there, then
-  port to `gems/alvar-tutor/knowledge/`.
+- Qualify the README's picker claims as CLI-harness-scoped — one clause each at
+  the "quiz picker (not A/B/C/D in chat)" promise and the "Quizzes must use the
+  native picker" table (with its fix-it hint "If the agent pastes A/B/C/D, say
+  'use the quiz tool'"): in the Gemini Gem, letters **are** the sanctioned
+  protocol. Applied verbatim in a Gem chat, the unqualified hint wrongly
+  instructs the user to complain about correct behavior.
+- `CONTRIBUTING.md`: scope ground rule 2 ("Native quiz UI only … Never paste
+  A/B/C/D in chat") and the Usually-skip entry ("Markdown A/B/C/D quizzes as a
+  fallback") to skill runtimes that have a native question tool, naming the
+  Gem's letter protocol as the sanctioned exception; add the
+  `skills/`-is-source-of-truth port line; add `gems/` to the repo map.
+
+### Single-source rule
+
+Each mechanic is stated **once**, at its most specific site, and every other
+mention is a pointer: quiz letters → the quiz protocol (§4); profiling shape →
+Turn 0 step 2; solid ground → the probe protocol; verify → the verify rule.
+Decisions above say "see" / "spec below", never restate. Parallel restatements
+drift, and one already did during drafting — this rule is the fix.
 
 ### Division of labor: instructions vs knowledge files
 
@@ -127,9 +149,17 @@ probe, teach, or verify protocols** — they are the method.
    is locked.
 7. **Visuals rule** — may offer an SVG code block when a picture would lock the
    idea; the learner renders it themselves; never claim to have inspected the
-   render. Sparingly.
-8. **Verify rule** — if a claim matters and you are not sure, use Google Search
-   grounding before teaching it as fact; otherwise mark uncertainty inline.
+   render. Before offering, audit the SVG source **as text** against the prose —
+   arrow directions, one symbol per object, no cropped text (full design +
+   failure rules in `knowledge/visual.md`). Sparingly.
+8. **Verify rule** — when a claim is empirical, historical, bibliographic, or
+   API-shaped — or you would otherwise present unearned certainty — state the
+   claim in one falsifiable sentence, ground it with Google Search, and report
+   an inline verdict in the pack's vocabulary: **confirmed / qualified /
+   contradicted / unknown**. Cite only sources the search actually surfaced.
+   If search fails or is inconclusive: mark the claim uncertain and proceed —
+   never teach it as fact. What you can derive in-session may be taught, said
+   to be **derived, not sourced**. (Full method: `knowledge/verify.md`.)
 9. **Session end** — summarize what locked, what is still `edge`, and the next
    node. Note that a new chat means a fresh probe (chat history is the only
    memory).
@@ -213,11 +243,41 @@ tell that the audit was not performed).
   - Keep unchanged: the six interview clusters (solid ground, goal, pace,
     struggle, voice, artifacts), "Use their words where you can", "Do not
     invent hobbies or a persona".
+- **verify.md** — port of `skills/learn-verify/SKILL.md` with these clause-level
+  adaptations:
+  - "Do not cite a URL you did not open" → "cite only sources the search
+    actually surfaced" (grounding replaces fetching; the Gem opens nothing).
+  - "Write the verdict into the session file if an alvar-learn session is
+    open" → deleted (no session file; the verdict is reported inline in chat).
+  - Keep unchanged: the when-to-run triggers; the skip-when-derivable rule
+    **with** its derived-not-sourced disclosure; the method (one falsifiable
+    sentence, quote or paraphrase the supporting line, note edition/year,
+    mark disagreements, prefer the source the field actually uses); the
+    verdict vocabulary `confirmed / qualified / contradicted / unknown` with
+    its meanings; and the rules (no invented papers, quotes, or page numbers;
+    one claim per run).
+- **visual.md** — port of `skills/learn-visual/SKILL.md` with these clause-level
+  adaptations:
+  - "Write `.alvar/visuals/<slug>-<n>.svg` (create the folder)" → "offer the
+    SVG as a code block" (no filesystem).
+  - Loop steps 3–5 (look at the file, fix, look again) → inverted default:
+    "You cannot view the render, ever. Keep every SVG simple enough to audit
+    as text; before offering, re-read the SVG source against the prose and
+    check the failure list below." (A text-audit pass replaces the look pass —
+    the design rules and failure list are what made pictures safe without
+    eyes; an unaudited SVG with a wrong arrow is worse than no SVG.)
+  - Keep unchanged: the design rules (one claim, no collage; large labels,
+    high contrast; show the objects, not a screenshot of the equation; no
+    decorative gradients, watermarks, or "AI art" backgrounds); the
+    failures-to-catch list (arrow direction disagrees with the prose; two
+    symbols for the same object; 3D that hides the relation; cropped text; a
+    picture of a different special case than the one taught); and "tell the
+    learner what to look at first".
 
 ## README.md (gems/alvar-tutor/)
 
 1. **Create the Gem**: gemini.google.com → Explore Gems → New Gem → name
-   **"Alvar Tutor"** → paste `INSTRUCTIONS.md` → upload the 3 `knowledge/` files →
+   **"Alvar Tutor"** → paste `INSTRUCTIONS.md` → upload the 5 `knowledge/` files →
    Save. (Free tier works; note that Gem quality improves on Advanced.)
 2. **Use**: open a fresh chat with the Gem, state a learning goal.
 3. **Smoke-test checklist** (the regression test — manual by nature):
@@ -225,11 +285,14 @@ tell that the audit was not performed).
    - [ ] Correct answer not always first / not marked
    - [ ] Mermaid plan (code block) shown BEFORE any teaching
    - [ ] One reasoning step per message; no textbook dump
-   - [ ] Strand map printed once as a table after probing
+   - [ ] Strand map printed as a table after probing; reprinted on request or
+         when a strand status changes to `known`
    - [ ] Mid-step question answered, then same node resumed
    - [ ] Wrong quiz answer → retry or inserted prerequisite, not advance
    - [ ] SVG offered at most occasionally, never claimed as self-inspected
-   - [ ] Unsourced empirical claim → searched or marked uncertain
+   - [ ] Unsourced empirical claim → verdict reported inline in the
+         confirmed / qualified / contradicted / unknown vocabulary, citing only
+         surfaced sources; never taught as fact when unverified
    - [ ] Session end summary: locked / edge / next node
    - [ ] **D answer**: answer "D. I don't know" once → strand marked `blocked`,
          no advance, no shame language, prerequisite inserted or strand skipped
@@ -260,7 +323,7 @@ tell that the audit was not performed).
   if Gemini adds reliable canvas round-trips).
 - Cross-chat state (state blocks, downloadable `.alvar/` files) — rejected.
 - Personal pre-profiled Gem variant — rejected (shareable only).
-- Any installer automation — 3 files + 1 paste is below the threshold.
+- Any installer automation — 5 files + 1 paste is below the threshold.
 
 ## Sources consulted
 
