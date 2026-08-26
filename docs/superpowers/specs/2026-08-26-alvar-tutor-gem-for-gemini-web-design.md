@@ -397,6 +397,9 @@ themselves, and a clause the lists miss is still caught by its class:
 ## Error handling & degradation
 
 - **Knowledge file not retrieved** — instructions are self-sufficient; loop unaffected.
+- **Long session, plan out of context** — on request, restate the current
+  mermaid plan (the frozen DAG can fall out of the context window; the map
+  reprint rule covers strands, not the graph).
 - **Learner ignores letters and types prose** — treat as signal, score it, restate
   the letter protocol once, don't nag.
 - **Learner replies with an invalid token** (E, an emoji, two letters) — treat as
