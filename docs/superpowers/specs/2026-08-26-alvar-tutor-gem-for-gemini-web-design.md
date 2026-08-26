@@ -106,8 +106,10 @@ probe, teach, or verify protocols** — they are the method.
    numbered step is its own exchange, and nothing here happens in one
    message)** —
    1. Restate the goal in one sentence; confirm.
-   2. Profile: 3–5 questions about how this mind wants to be taught (voice, density,
-      struggle preference, solid ground), asked conversationally — not a form.
+   2. Profile: 3–5 questions in total about how this mind wants to be taught
+      (covering the profile clusters — solid ground, goal, pace, struggle,
+      voice, visuals), asked conversationally — not a form. This step owns
+      the cadence; `knowledge/learner-profile.md` points here.
    3. Probe (spec below).
    4. Plan: mermaid DAG shown **before** teaching; ask if they want changes;
       freeze until a quiz failure forces a new node (or the learner asks to
@@ -225,6 +227,28 @@ and each list was produced by reading the source file line-by-line against
 the runtime, so every entry corresponds to a real clause (a no-op entry is a
 tell that the audit was not performed).
 
+Before committing any port, run the cross-check the lists are built for:
+re-read each ported file line-by-line against its source, **and** diff every
+cadence/number that appears in both the instructions and a knowledge file —
+they must match or point (the single-source rule). Round 2's cadence
+conflict (3–5 questions in the instructions vs 2–3-per-turn in a knowledge
+file) shipped because this cross-check existed on paper and was never
+executed.
+
+### Shared substitution table
+
+Every runtime difference between the skill pack and a chat-only harness
+reduces to three substitutions. The per-file lists apply them clause-by-
+clause; this table is the class-level contract. Porting to a new harness
+means rewriting these three rows — the per-file deltas then mostly write
+themselves, and a clause the lists miss is still caught by its class:
+
+| Runtime fact | Substitution |
+|---|---|
+| No filesystem — no `.alvar/`, no maps/sessions/visuals as files | file writes → say it in chat; the transcript is the log |
+| No native question tool | tool calls → chat letter protocol (instructions §4) |
+| No render inspection — the Gem can't see what it emits | "look at it" → audit the source as text; never claim inspection |
+
 - **philosophy.md** — ports **verbatim**. The 36-line source contains zero
   runtime references (no harness, tool, `.alvar/`, or skill mentions; its
   only external reference is the youtu.be citation). Adaptation list: empty.
@@ -241,7 +265,12 @@ tell that the audit was not performed).
   - `.alvar/maps/<topic>.md` writes → "print the map once in chat" (the
     probe protocol in the instructions carries the reprint rule).
   - `.alvar/sessions/…` writes → "the chat transcript is the session log".
-  - `learn-visual` reference → the visuals rule (see instructions).
+  - Phase 3 "`learn-visual` (or write an SVG and look at it)" → the visuals
+    rule (see instructions) — the parenthetical's look-at-it is the
+    no-render-inspection substitution: offer the code block, audit as text,
+    never claim to look.
+  - "What the system absorbs" list: "file logging" → "transcript logging"
+    (no filesystem).
   - `learn-verify` reference → the verify rule (see instructions), carrying
     the source's trigger conditions through the substitution: "when the
     domain is empirical, historical, or you are unsure". The unconditional
@@ -250,20 +279,33 @@ tell that the audit was not performed).
   `skills/learn-profile/assets/LEARNER.md` (the **assets** copy is
   authoritative for porting; `templates/LEARNER.md` is the human-facing
   variant and differs at line 3). Adaptations:
+  - Opening thesis "The file is the teacher" → "This profile is the teacher"
+    (it lives in this chat's history, not a file).
   - "2–3 questions per turn, through the harness quiz UI in
-    ../alvar-learn/references/quiz-ui.md — not as a markdown list" →
-    "2–3 questions per turn, conversationally — not as a markdown form"
-    (profiling is an interview, not a graded quiz; no letters here).
+    ../alvar-learn/references/quiz-ui.md — not as a markdown list" → "Ask
+    3–5 questions in total, conversationally, woven into the opening
+    exchanges — the instructions' Turn 0 step 2 governs the shape" (the
+    instructions own the cadence per the single-source rule; the six
+    clusters are coverage hints for those 3–5 questions, not a mandatory
+    tour).
   - "Create `.alvar/LEARNER.md` from assets/LEARNER.md" → "hold the profile
-    in this chat's history; restate it in one line when the interview ends".
+    in this chat's history".
   - "If a file already exists, show a diff of proposed edits and wait" →
     deleted (no filesystem).
-  - "Tell them `alvar-learn` will read it every session" → "Tell them the
-    profile lives only in this chat; a new chat starts fresh" (the source
-    line is false in the Gem runtime).
-  - Keep unchanged: the six interview clusters (solid ground, goal, pace,
-    struggle, voice, artifacts), "Use their words where you can", "Do not
-    invent hobbies or a persona".
+  - "Show the file. Tell them `alvar-learn` will read it every session." →
+    "Restate the profile in one line. Tell them it lives only in this chat;
+    a new chat starts fresh." (Sentence 1 displays a file that cannot
+    exist; sentence 2 promises a persistence the Gem cannot deliver.)
+  - Interview cluster 6 "Artifacts — Obsidian / markdown / no files" →
+    "Artifacts — how do you want visuals offered: SVG code blocks, or
+    none?" (the original's three destinations all require a filesystem).
+  - In the merged assets template: "Write maps and sessions under
+    `.alvar/`" → "Maps and plans live in this chat"; "I read session
+    markdown in: editor / Obsidian / other" → deleted (no session
+    markdown); keep "Visuals: SVG when a picture would lock the idea".
+  - Keep unchanged: interview clusters 1–5 (solid ground, goal, pace,
+    struggle, voice), "Use their words where you can", "Do not invent
+    hobbies or a persona".
 - **verify.md** — port of `skills/learn-verify/SKILL.md` with these clause-level
   adaptations:
   - "Do not cite a URL you did not open" → "cite only sources the search
@@ -279,8 +321,13 @@ tell that the audit was not performed).
     one claim per run).
 - **visual.md** — port of `skills/learn-visual/SKILL.md` with these clause-level
   adaptations:
-  - "Write `.alvar/visuals/<slug>-<n>.svg` (create the folder)" → "offer the
-    SVG as a code block" (no filesystem).
+  - Output section, **both** sentences: "Write `.alvar/visuals/<slug>-<n>.svg`
+    (create the folder). Embed or link it in the session file." → "Offer the
+    SVG as a code block in chat." (no filesystem — the second sentence's
+    session-file write is the same substitution).
+  - "Prefer SVG. Use another format only if the harness cannot preview SVG."
+    → "Prefer SVG (the learner renders it themselves)." (no harness exists
+    to evaluate the conditional — dead code that reads as live logic).
   - Loop steps 3–5 (look at the file, fix, look again) → inverted default:
     "You cannot view the render, ever. Keep every SVG simple enough to audit
     as text; before offering, re-read the SVG source against the prose and
