@@ -73,8 +73,13 @@ Plus (all in the same PR as the Gem, so no shipped surface contradicts another):
 - `CONTRIBUTING.md`: scope ground rule 2 ("Native quiz UI only … Never paste
   A/B/C/D in chat") and the Usually-skip entry ("Markdown A/B/C/D quizzes as a
   fallback") to skill runtimes that have a native question tool, naming the
-  Gem's letter protocol as the sanctioned exception; add the
-  `skills/`-is-source-of-truth port line; add `gems/` to the repo map.
+  Gem's letter protocol as the sanctioned exception; scope the **sibling**
+  Usually-skip entry ("A sixth copy of the philosophy in a new file") and
+  ground rule 1 ("One home per fact … don't restate them") to copies outside
+  `gems/` — ports under `gems/` carry the source pin and adaptation header,
+  making them sanctioned ports, not sixth copies (a contributor applying the
+  unscoped list would file a deletion PR against the Gem's knowledge files);
+  add the `skills/`-is-source-of-truth port line; add `gems/` to the repo map.
 
 ### Single-source rule
 
@@ -95,10 +100,15 @@ Because knowledge files are retrieval-indexed (not guaranteed every turn):
 
 ## INSTRUCTIONS.md — behavioral contract
 
-Structure (target ~600–900 words). The instruction-length cap is unpublished;
-if the box truncates near the pessimistic ~4k-char report, cut in this order:
-scope guard → session-end summary → visuals rule. **Never cut the quiz,
-probe, teach, or verify protocols** — they are the method.
+Structure (target ~550–650 words, **≤ ~4k characters — measure the char
+count before pasting**; the pessimistic report caps the box at ~4k, and
+600 words ≈ 4.2k chars already breaches it). If over budget, cut in this
+order: visuals rule → session-end summary → scope guard — the scope guard
+**last**, because it is the truncation canary: deleting it first destroys
+the only detector of the silent-truncation failure mode. If it must go,
+re-key the canary checklist item to the new final section. **Never cut
+the quiz, probe (including the scoring rubric), teach, or verify
+protocols** — they are the method.
 
 1. **Persona** — "You are one teacher for one mind. Not a course. Not a survey."
    Ported from `alvar-learn/SKILL.md`.
@@ -164,8 +174,10 @@ probe, teach, or verify protocols** — they are the method.
    After probing, print the map **once** as a markdown table
    `| strand | status | evidence |` with statuses `known / edge / unknown /
    blocked`; reference it without reprinting — but reprint the current table
-   on request or whenever a strand's status changes to `known`, so the printed
-   record never silently misstates where the learner stands.
+   on request and whenever **any** strand's status changes or a strand is
+   added (a lock-in failure can flip `edge`→`unknown`; an inserted
+   prerequisite adds a row), so the printed record never silently misstates
+   where the learner stands.
 6. **Teach protocol** — one node per turn; accept interruptions (answer, then
    resume the same node unless the question reveals a missing prerequisite — then
    insert it); give "accept at face value" facts only after the step they rest on
@@ -349,12 +361,17 @@ themselves, and a clause the lists miss is still caught by its class:
    Save. (Free tier works; note that Gem quality improves on Advanced.)
 2. **Use**: open a fresh chat with the Gem, state a learning goal.
 3. **Smoke-test checklist** (the regression test — manual by nature):
+   - [ ] **Turn-0 profiling**: fresh chat → 3–5 profile questions (covering
+         the clusters: solid ground, goal, pace, struggle, voice, visuals)
+         before the probe, and later teaching visibly honors them
+         (voice/density/struggle)
    - [ ] First quiz arrives as ONE question, options A/B/C + "D. I don't know"
    - [ ] Correct answer not always first / not marked
    - [ ] Mermaid plan (code block) shown BEFORE any teaching
    - [ ] One reasoning step per message; no textbook dump
-   - [ ] Strand map printed as a table after probing; reprinted on request or
-         when a strand status changes to `known`
+   - [ ] Strand map printed as a table after probing; reprinted on request
+         and after ANY status change or strand insertion (test with a wrong
+         answer → retry/insert, then check the table)
    - [ ] Mid-step question answered, then same node resumed
    - [ ] Wrong quiz answer → retry or inserted prerequisite, not advance
    - [ ] SVG offered at most occasionally, never claimed as self-inspected
@@ -373,7 +390,9 @@ themselves, and a clause the lists miss is still caught by its class:
    - [ ] **Truncation canary**: ask "what can you do?" → the scope guard (the
          LAST instruction section) answers with the 2–3 sentence explanation —
          catches silent instruction-box truncation, which fails like a missing
-         feature with no error anywhere
+         feature with no error anywhere. Precondition: valid while the scope
+         guard is present; if it was cut for budget, re-key this item to the
+         new final section
 
 ## Error handling & degradation
 
@@ -396,6 +415,11 @@ themselves, and a clause the lists miss is still caught by its class:
 - Cross-chat state (state blocks, downloadable `.alvar/` files) — rejected.
 - Personal pre-profiled Gem variant — rejected (shareable only).
 - Any installer automation — 5 files + 1 paste is below the threshold.
+- A port script generating the knowledge files from sources. The matrix is
+  machine-shaped and the roast is right that generation would turn the
+  exhaustiveness claim into a diff — but five files and one port don't
+  justify a build step. Revisit when a second harness port exists (the
+  shared substitution table keeps the ritual mechanical until then).
 
 ## Sources consulted
 
