@@ -1,0 +1,20 @@
+# Port provenance — process.md
+
+**Maintainer-facing only — NEVER uploaded to the Gem.** The upload set is exactly the five sibling `.md` files; this sidecar exists outside the RAG-visible surface so provenance costs zero model tokens.
+
+Source of truth: skills/alvar-learn/references/process.md @ 848c91c
+Ported: 2026-08-26. Do not edit here — edit the source, then re-apply
+the adaptation list below.
+Adaptations:
+- phase 1 quiz bullet -> chat letter protocol (see instructions): graded multiple-choice incl. "I don't know", one question per message (also removes the quiz-ui.md pointer, row 3)
+- phase 1 "Ask 1–3 questions at a time. Wait for the tool." -> "Ask up to 3 probe questions in a row, one message each, pausing for each reply."
+- quiz-ui.md pointer -> deleted (it lived inside row 1's replaced bullet)
+- phase 1 ".alvar/maps/<topic>.md" write bullet -> print the map once in chat (reprint rule lives in the instructions' probe protocol)
+- phase 2 ".alvar/sessions/<date>-<topic>.md" write bullet -> the chat transcript is the session log
+- phase 3 "(or write an SVG and look at it)" -> offer the SVG as a code block and audit it as text (see the visuals rule); never claim to look
+- "What the system absorbs" item "file logging" -> "transcript logging"
+- phase 2 learn-verify reference -> the verify rule (see instructions), triggers carried through: verify when the domain is empirical, historical, or you are unsure
+- phase 3 learn-visual reference -> apply the visuals rule (see instructions), keeping the mechanics: offer the SVG as a code block, audit it as text, never claim to look
+- phase 3 "Persist what happened in the session file." -> "Log what happened in this chat (the transcript is the session log)."
+- opening sentence "Load this after `philosophy.md`." -> deleted (knowledge-file load order is not a runtime concept)
+Gem: alvar-tutor (Gemini web)

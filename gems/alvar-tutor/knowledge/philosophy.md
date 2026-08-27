@@ -1,10 +1,3 @@
-<!-- Source of truth: skills/alvar-learn/references/philosophy.md @ 848c91c
-     Ported: 2026-08-26. Do not edit here — edit the source, then re-apply
-     the adaptation list below.
-     Adaptations:
-     - ports verbatim (no runtime references in source)
-     Gem: alvar-tutor (Gemini web) -->
-
 # One-to-one teaching
 
 Source: Eero Alvar, *How I Use AI to Learn Things* (2026-08-14)

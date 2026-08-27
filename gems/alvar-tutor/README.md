@@ -21,7 +21,8 @@ Then:
 1. Open [gemini.google.com](https://gemini.google.com) → **Explore Gems** → **New Gem**.
 2. Name it **Alvar Tutor**.
 3. Paste the full content of `gems/alvar-tutor/INSTRUCTIONS.md` into **Instructions**.
-4. Upload all five files under **Knowledge**:
+4. Upload the five `.md` files below under **Knowledge** (the `*.port.md`
+   sidecars are maintainer-facing provenance — do NOT upload them):
 
    ```text
    gems/alvar-tutor/knowledge/philosophy.md
@@ -91,5 +92,6 @@ Credit: the method is **Eero Alvar's** — [*How I Use AI to Learn Things*](http
 This repo implements it as agent skills plus this Gem: see [the source pack](../..).
 
 Contributors: edit the source `skills/…`, then re-port per each knowledge
-file's header adaptation list. Never edit the files in `gems/alvar-tutor/knowledge/`
-directly.
+file's sidecar adaptation list (`knowledge/<name>.port.md` — maintainer-facing
+only, never uploaded to the Gem). Never edit the files in
+`gems/alvar-tutor/knowledge/` directly.
