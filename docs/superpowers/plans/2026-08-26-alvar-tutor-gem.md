@@ -319,12 +319,12 @@ grep -c 'arrow' gems/alvar-tutor/knowledge/visual.md            # ≥ 2 (design 
 
 **Acceptance Criteria:**
 - [ ] Create-the-Gem steps (gemini.google.com → Explore Gems → New Gem → name "Alvar Tutor" → paste INSTRUCTIONS.md → upload the 5 knowledge files → Save) with the `wc -m` ≤ 4000 pre-paste gate
-- [ ] All 16 smoke items from spec §README (gems/alvar-tutor/) — Turn-0 profiling, one-question quiz, rotation, mermaid-before-teaching, one-step, map print/reprint (any change/insertion), mid-step resume, wrong-answer branch, SVG sparingly, verdict vocabulary, session-end summary, D-answer, prose degradation, huge-brief degradation, off-topic degradation, truncation canary (+ precondition + blind spot)
+- [ ] The smoke checklist matches spec §README **exactly** — the spec owns the item list (single-source rule); when Letter-only learner landed in `de3d07e` it held 17 items. Transcribe verbatim from the spec, never from this plan's historical enumeration.
 - [ ] Credit line: method is Eero Alvar's (link the video); this repo implements
 
 **Verify:**
 ```bash
-grep -c '\- \[ \]' gems/alvar-tutor/README.md   # ≥ 16 (the spec's checklist holds 16 items — an earlier "17" was a plan-time miscount)
+grep -c '\- \[ \]' gems/alvar-tutor/README.md   # == item count in spec §README (17 at de3d07e); count drift vs spec = transcription error
 grep -c 'Alvar Tutor' gems/alvar-tutor/README.md  # ≥ 1
 grep -ci 'eero alvar' gems/alvar-tutor/README.md # ≥ 1
 ```
@@ -332,7 +332,7 @@ grep -ci 'eero alvar' gems/alvar-tutor/README.md # ≥ 1
 **Steps:**
 - [ ] **Step 1:** Write the README: 3 numbered sections (Create the Gem / Use / Smoke-test checklist) transcribing the checklist items from spec §"README.md (gems/alvar-tutor/)" verbatim.
 - [ ] **Step 2:** Run the Verify receipts.
-- [ ] **Step 3:** Commit — `feat(gem): gems/alvar-tutor/README.md — install + 16-item smoke checklist`.
+- [ ] **Step 3:** Commit — `feat(gem): gems/alvar-tutor/README.md — install + smoke checklist`.
 
 ---
 
@@ -379,16 +379,22 @@ grep -c 'gems/' CONTRIBUTING.md                            # ≥ 3 (port line + 
 - [ ] Every knowledge file's body-scans from Tasks 2–5 still clean (re-run all five)
 - [ ] `wc -m INSTRUCTIONS.md` still ≤ 4000
 - [ ] No cadence/number appears in both INSTRUCTIONS.md and a knowledge file with conflicting values (`grep -n 'questions'` across all six files; every hit must agree or point)
-- [ ] The header pins in all 5 knowledge files name the same SHA — exactly the `source-pin:` value recorded in Task 1's commit message
+- [ ] The pins in all 5 provenance sidecars (`*.port.md`) name the same SHA — exactly the `source-pin:` value recorded in Task 1's commit message
 - [ ] Spec §knowledge adaptation rows ↔ shipped headers: row-for-row identical
 
 **Verify:**
 ```bash
-for f in gems/alvar-tutor/knowledge/*.md; do echo "== $f"; sed -n '/-->/,$p' "$f" | tail -n +2 | grep -cE '\.alvar/|quiz-ui|harness quiz UI|session file|Wait for the tool|Never dump'; done
+# body scan — MUST exclude *.port.md sidecars (they legitimately QUOTE the
+# forbidden phrases their adaptation rows killed; sweeping them red-flags
+# clean files). Whole-file is correct now that bodies carry no comments.
+find gems/alvar-tutor/knowledge -name '*.md' ! -name '*.port.md' -exec sh -c \
+  'printf "%s: " "$1"; grep -cE "\.alvar/|quiz-ui|harness|session file|Wait for the tool|Never dump|look at it|did not open" "$1"' _ {} \;
 # every count must be 0
 wc -m gems/alvar-tutor/INSTRUCTIONS.md
-grep -rn 'questions' gems/alvar-tutor/ | grep -v README
-grep -c '@ ' gems/alvar-tutor/knowledge/*.md
+grep -rn 'questions' gems/alvar-tutor/ | grep -v README | grep -v port.md
+# pin coherence: one distinct SHA across the five sidecars' Source-of-truth lines
+grep -h 'Source of truth' gems/alvar-tutor/knowledge/*.port.md | grep -oE '[0-9a-f]{7}' | sort -u   # exactly one SHA
+ls gems/alvar-tutor/knowledge/*.port.md | wc -l   # 5
 ```
 
 **Steps:**

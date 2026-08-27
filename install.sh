@@ -98,10 +98,15 @@ while IFS= read -r dest; do
   for name in "${LEGACY_SKILLS[@]}"; do
     if [[ -e "$dest/$name" || -L "$dest/$name" ]]; then
       # Data safety: only remove copies provably ours. Every Alvarmethod
-      # SKILL.md carries the Eero Alvar source link in its frontmatter; a
-      # `teach` dir without it belongs to another package (or predates the
-      # pack) and stays in place with a warning instead of being destroyed.
-      if [[ -f "$dest/$name/SKILL.md" ]] && grep -q 'kzcI5F4tGiU' "$dest/$name/SKILL.md"; then
+      # SKILL.md carries the Eero Alvar source link in its YAML frontmatter,
+      # so the marker must appear INSIDE the frontmatter block (--- to ---):
+      # an inspired-by skill citing the video in prose does not qualify.
+      # Case-insensitive so URL-normalized copies still match. A `teach`
+      # dir without the frontmatter marker belongs to another package and
+      # stays in place with a warning instead of being destroyed.
+      if [[ -f "$dest/$name/SKILL.md" ]] \
+         && [[ "$(head -n1 "$dest/$name/SKILL.md")" == "--"* ]] \
+         && sed -n '2,/^---[[:space:]]*$/{/^---/d;p}' "$dest/$name/SKILL.md" | grep -qi 'kzci5f4tgiu'; then
         rm -rf "$dest/$name"
         echo "removed stale $dest/$name (renamed to ${SKILLS[0]})"
       else

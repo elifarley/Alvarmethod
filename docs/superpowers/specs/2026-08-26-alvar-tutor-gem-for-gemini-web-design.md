@@ -17,7 +17,7 @@ knowledge files — no `Skill` tool, no filesystem, no native question UI.
 | Constraint | Value | Consequence |
 |---|---|---|
 | Knowledge files | max **10** | 5 files used, 5 spare; no pressure |
-| Instruction length | no official cap published; community reports vary (~4k to 100k+ chars) | instructions ≤ ~4k chars, measured (~550–650 words); depth goes to knowledge files |
+| Instruction length | no official cap published; community reports vary (~4k to 100k+ chars) | instructions ≤ ~4k chars, measured with `wc -m`; depth goes to knowledge files |
 | Knowledge file loading | RAG-indexed, pulled when relevant — **not** guaranteed every turn | instructions must be self-sufficient for the core loop |
 | Mermaid | not rendered in Gemini chat (shows raw code) | plan ships as mermaid **code block** (user-accepted) |
 | Filesystem | none | no `.alvar/` state; chat history is the only memory |
@@ -100,7 +100,7 @@ Because knowledge files are retrieval-indexed (not guaranteed every turn):
 
 ## INSTRUCTIONS.md — behavioral contract
 
-Structure (target ~550–650 words, **≤ ~4k characters — gate with
+Structure (**≤ ~4k characters — gate with
 `wc -m gems/alvar-tutor/INSTRUCTIONS.md` before pasting**; the pessimistic
 report caps the box at ~4k, and 600 words ≈ 4.2k chars already breaches
 it). If over budget, cut in this order: visuals rule → session-end
@@ -144,11 +144,15 @@ the method.
      same message.
    - On reply: score against the probe rubric (§5): `known` → next node;
      `edge` → retry; `unknown` → insert a prerequisite. "D" marks the
-     strand `blocked` — do not guess, do not shame; it's map data. (Delta,
-     advertised: the pack's scoring row allows `blocked` **or** `unknown`
-     for D; the Gem hard-maps to `blocked` so D is always visible map
-     data — and the pack's other blocked trigger, "the question needs a
-     tool you don't have," never applies in a runtime with no tools.)
+     strand `blocked` — do not guess, do not shame; it's map data. (Two
+     deltas from the pack's rubric, advertised: **(a)** row 2 is not the
+     pack's "correct, thin reason | edge" — a bare correct letter is
+     `edge` and locks as `known` when answered correct again on its retry,
+     because a compliant letter-only learner must be able to advance;
+     **(b)** the pack allows `blocked` **or** `unknown` for D, the Gem
+     hard-maps to `blocked` so D is always visible map data — and the
+     pack's other blocked trigger, "the question needs a tool you don't
+     have," never applies in a runtime with no tools.)
    - Applied questions over recap prompts; if they answer from vibe, ask one tighter
      question before advancing.
 5. **Probe protocol** — start broad, binary-search every strand the lesson depends
@@ -163,8 +167,9 @@ the method.
    history to corroborate them. The same standard governs the huge-brief
    degradation path below — one rule, stated once, applied everywhere.)
    Invite a talk-through: a right letter with a wrong reason is `edge`, not
-   `known`. Score every answer against the pack's rubric (ported verbatim
-   from `skills/probe/SKILL.md` — this table IS what `edge` means; without
+   `known`. Score every answer against the pack's rubric (ported from
+   `skills/probe/SKILL.md` @ 848c91c, with the two deliberate deltas
+   advertised in §4 above — this table IS what `edge` means; without
    it the map is improvised):
 
    | result | status move |
