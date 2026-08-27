@@ -25,7 +25,7 @@ Credit stays with **[Eero Alvar — How I Use AI to Learn Things](https://youtu.
 ## Ground rules
 
 1. **One home per fact.** Philosophy lives in `skills/alvar-learn/references/philosophy.md`. Process in `process.md`. Quiz tools in `quiz-ui.md`. Point at those files; don’t restate them. Exception: ports under `gems/` are sanctioned because each carries its source pin + adaptation header.
-2. **Native quiz UI only.** Probe and lock-in quizzes must call the harness tool (`ask_user_question`, `AskUserQuestion`, `question`, Pi `quiz` / `ask_user`). Never paste A/B/C/D in chat, which scopes to runtimes that have a native question tool; the Gemini Gem’s letter protocol is the sanctioned exception (see `gems/alvar-tutor/`). Details: [`skills/alvar-learn/references/quiz-ui.md`](skills/alvar-learn/references/quiz-ui.md).
+2. **Native quiz UI only.** Probe and lock-in quizzes must call the harness tool (`ask_user_question`, `AskUserQuestion`, `question`, Pi `quiz` / `ask_user`). Never paste A/B/C/D in chat; this rule covers only runtimes that have a native question tool. The Gemini Gem has none, so its letter protocol is the sanctioned exception (see `gems/alvar-tutor/`). Details: [`skills/alvar-learn/references/quiz-ui.md`](skills/alvar-learn/references/quiz-ui.md).
 3. **Do not leak the answer.** No `(Recommended)` on the right option. No “correct choice first.”
 4. **Struggle stays in the material.** Skills absorb logistics (order, files, verify, diagrams).
 5. **Portable `SKILL.md`.** [Agent Skills](https://agentskills.io/specification) frontmatter only: `name`, `description`, optional `license` / `metadata`. `name` must match the folder. `description` ≤ 1024 chars and must include trigger phrases.
@@ -37,7 +37,7 @@ Credit stays with **[Eero Alvar — How I Use AI to Learn Things](https://youtu.
 skills/<name>/SKILL.md     # what agents load
 skills/alvar-learn/references/   # shared method (philosophy, process, quiz UI, files)
 skills/*/assets/           # templates the skill writes
-gems/alvar-tutor/            # Gemini web Gem port (instructions + knowledge + smoke checklist)
+gems/alvar-tutor/          # Gemini web Gem port (instructions + knowledge + smoke checklist)
 install.sh                 # copies skills into harness dirs
 source/                    # credited transcript
 templates/                 # human-facing copies
