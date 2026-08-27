@@ -65,6 +65,8 @@ build before calling it done.
      answer → retry/insert, then check the table)
 - [ ] Mid-step question answered, then same node resumed
 - [ ] Wrong quiz answer → retry or inserted prerequisite, not advance
+- [ ] **Letter-only learner**: answers correct with just the letter twice →
+      the second answer locks the node and teaching advances
 - [ ] SVG offered at most occasionally, never claimed as self-inspected
 - [ ] Unsourced empirical claim → verdict reported inline in the
      confirmed / qualified / contradicted / unknown vocabulary, citing only

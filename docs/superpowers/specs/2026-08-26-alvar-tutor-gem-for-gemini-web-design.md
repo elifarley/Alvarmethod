@@ -170,7 +170,9 @@ the method.
    | result | status move |
    |---|---|
    | correct + sound reason | `known` |
-   | correct, thin reason | `edge` |
+   | correct letter alone | `edge`; locks `known` if answered correct
+     again on its retry (a compliant letter-only learner must be able to
+     advance — one retry, then lock-in, no essay demanded) |
    | wrong, near-miss | `edge` |
    | wrong, foundation missing | `unknown` |
    | I don't know (D) | `blocked` |
@@ -289,6 +291,8 @@ loop to a text-audit pass and keeps design rules + failure list intact.
          answer → retry/insert, then check the table)
    - [ ] Mid-step question answered, then same node resumed
    - [ ] Wrong quiz answer → retry or inserted prerequisite, not advance
+   - [ ] **Letter-only learner**: answers correct with just the letter twice →
+         the second answer locks the node and teaching advances
    - [ ] SVG offered at most occasionally, never claimed as self-inspected
    - [ ] Unsourced empirical claim → verdict reported inline in the
          confirmed / qualified / contradicted / unknown vocabulary, citing only

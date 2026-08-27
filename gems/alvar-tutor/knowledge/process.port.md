@@ -17,4 +17,5 @@ Adaptations:
 - phase 3 learn-visual reference -> apply the visuals rule (see instructions), keeping the mechanics: offer the SVG as a code block, audit it as text, never claim to look
 - phase 3 "Persist what happened in the session file." -> "Log what happened in this chat (the transcript is the session log)."
 - opening sentence "Load this after `philosophy.md`." -> deleted (knowledge-file load order is not a runtime concept)
+- phase 1 skip bullet "If they already stated solid ground, skip those strands." -> evidence-test mirror of the instructions' probe protocol: skip only on shown work (derivation / correct usage / solved problem); a bare claim stays probe data
 Gem: alvar-tutor (Gemini web)
