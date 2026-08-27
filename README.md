@@ -23,10 +23,10 @@ That’s the install. Works in **Claude Code**, **Codex**, **Grok**, **Pi**, **O
 Then open a **learning folder** (not this repo) and say:
 
 ```text
-/teach I want a solid introduction to <topic>
+/alvar-learn I want a solid introduction to <topic>
 ```
 
-You should get a **quiz picker** (not A/B/C/D in chat) → a mermaid DAG → **one** reasoning step → a lock-in quiz.
+You should get a **quiz picker** (not A/B/C/D in chat; that is a CLI-harness rule, while in the Gemini Gem letters are the sanctioned protocol) → a mermaid DAG → **one** reasoning step → a lock-in quiz.
 
 ---
 
@@ -44,7 +44,7 @@ npx skills add vasanthsreeram/Alvarmethod -g --all
 npx skills add vasanthsreeram/Alvarmethod --list
 
 # one skill
-npx skills add vasanthsreeram/Alvarmethod --skill teach -g -y
+npx skills add vasanthsreeram/Alvarmethod --skill alvar-learn -g -y
 
 # one harness
 npx skills add vasanthsreeram/Alvarmethod -g -y -a claude-code -a grok -a pi -a opencode -a codex
@@ -119,13 +119,13 @@ flowchart LR
 
 | Skill | Job |
 |-------|-----|
-| `teach` | Full loop: probe → plan → one-step teaching |
+| `alvar-learn` | Full loop: probe → plan → one-step teaching |
 | `probe` | Understanding map only |
 | `learn-profile` | Write `.alvar/LEARNER.md` |
 | `learn-visual` | One SVG, look at it, fix it |
 | `learn-verify` | Fact-check a claim before it is taught as fact |
 
-Quizzes **must** use the native picker:
+Quizzes **must** use the native picker (CLI harnesses; the Gemini Gem’s letter protocol is the sanctioned exception):
 
 | Agent | Tool |
 |-------|------|
@@ -134,7 +134,7 @@ Quizzes **must** use the native picker:
 | OpenCode | `question` |
 | Pi | `quiz` / `ask_user` / `askUserQuestion` |
 
-If the agent pastes A/B/C/D, say **“use the quiz tool.”** If it dumps a textbook, say **“one node only.”**
+If the agent pastes A/B/C/D, say **“use the quiz tool.”** (A CLI-harness rule; in the Gemini Gem, letters are the protocol.) If it dumps a textbook, say **“one node only.”**
 
 Session files land in the learning folder:
 
@@ -146,6 +146,10 @@ Session files land in the learning folder:
 ```
 
 Point Obsidian at `.alvar/` if you want LaTeX preview.
+
+## Gemini web (Gem)
+
+The same loop as a shareable [Gem](https://gemini.google.com), built from `gems/alvar-tutor/`: create-and-install steps live in [`gems/alvar-tutor/README.md`](gems/alvar-tutor/README.md). No skills runtime there, and no question tool either, so letters (A/B/C plus “D. I don’t know”, one question per message) stand in for the picker.
 
 ---
 

@@ -26,7 +26,7 @@ Install **how this mind wants to be taught**. The file is the teacher. Do not cr
 5. **Voice** — density, tone, hated LLM habits, language.
 6. **Artifacts** — Obsidian / markdown / no files.
 
-Do not ask all six in one message. 2–3 questions per turn, through the harness quiz UI in [../teach/references/quiz-ui.md](../teach/references/quiz-ui.md) — not as a markdown list.
+Do not ask all six in one message. 2–3 questions per turn, through the harness quiz UI in [../alvar-learn/references/quiz-ui.md](../alvar-learn/references/quiz-ui.md) — not as a markdown list.
 
 ## Write
 
@@ -36,4 +36,4 @@ If a file already exists, show a diff of proposed edits and wait.
 
 ## After
 
-Show the file. Tell them `teach` will read it every session. Offer to start a probe on the current goal.
+Show the file. Tell them `alvar-learn` will read it every session. Offer to start a probe on the current goal.

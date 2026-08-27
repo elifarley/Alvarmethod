@@ -4,7 +4,10 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 SKILLS_SRC="$ROOT/skills"
-SKILLS=(teach probe learn-visual learn-verify learn-profile)
+SKILLS=(alvar-learn probe learn-visual learn-verify learn-profile)
+# Pre-rename name of alvar-learn; removed from targets so a stale copy can't
+# keep answering to /teach after the rename.
+LEGACY_SKILLS=(teach)
 
 usage() {
   cat <<'EOF'
@@ -92,6 +95,25 @@ copied=0
 removed=0
 while IFS= read -r dest; do
   [[ -z "$dest" ]] && continue
+  for name in "${LEGACY_SKILLS[@]}"; do
+    if [[ -e "$dest/$name" || -L "$dest/$name" ]]; then
+      # Data safety: only remove copies provably ours. Every Alvarmethod
+      # SKILL.md carries the Eero Alvar source link in its YAML frontmatter,
+      # so the marker must appear INSIDE the frontmatter block (--- to ---):
+      # an inspired-by skill citing the video in prose does not qualify.
+      # Case-insensitive so URL-normalized copies still match. A `teach`
+      # dir without the frontmatter marker belongs to another package and
+      # stays in place with a warning instead of being destroyed.
+      if [[ -f "$dest/$name/SKILL.md" ]] \
+         && [[ "$(head -n1 "$dest/$name/SKILL.md")" == "--"* ]] \
+         && sed -n '2,/^---[[:space:]]*$/{/^---/d;p}' "$dest/$name/SKILL.md" | grep -qi 'kzci5f4tgiu'; then
+        rm -rf "$dest/$name"
+        echo "removed stale $dest/$name (renamed to ${SKILLS[0]})"
+      else
+        echo "WARNING: keeping $dest/$name — not recognized as an Alvarmethod copy; remove it manually if it is yours" >&2
+      fi
+    fi
+  done
   if [[ "$DO_UNINSTALL" -eq 1 ]]; then
     for name in "${SKILLS[@]}"; do
       if [[ -e "$dest/$name" || -L "$dest/$name" ]]; then
@@ -115,5 +137,5 @@ if [[ "$DO_UNINSTALL" -eq 1 ]]; then
   echo "done. removed $removed skill dirs."
 else
   echo "done. installed $copied skill dirs."
-  echo "Open a learning folder (not this repo) and run /teach or ask to be taught something."
+  echo "Open a learning folder (not this repo) and run /alvar-learn or ask to be taught something."
 fi

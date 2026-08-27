@@ -17,7 +17,7 @@ metadata:
 
 Measure first. Do not teach during a probe except a one-line correction after they answer.
 
-**Quiz UI is mandatory.** Read [../teach/references/quiz-ui.md](../teach/references/quiz-ui.md) and call that tool. Never print A/B/C/D in the chat.
+**Quiz UI is mandatory.** Read [../alvar-learn/references/quiz-ui.md](../alvar-learn/references/quiz-ui.md) and call that tool. Never print A/B/C/D in the chat.
 
 ## Goal
 

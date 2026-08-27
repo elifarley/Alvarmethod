@@ -16,7 +16,7 @@ Create `.alvar/` on first use.
 
 If missing, run `learn-profile` or write a stub from `assets/LEARNER.md` and ask 3–5 questions to fill it. Do not invent a personality.
 
-Read LEARNER.md at the start of every `teach` session. It controls:
+Read LEARNER.md at the start of every `alvar-learn` session. It controls:
 
 - voice and density
 - how they want struggle
