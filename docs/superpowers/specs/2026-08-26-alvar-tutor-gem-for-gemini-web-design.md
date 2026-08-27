@@ -323,7 +323,9 @@ themselves, and a clause the lists miss is still caught by its class:
   - Interview cluster 6 "Artifacts — Obsidian / markdown / no files" →
     "Artifacts — how do you want visuals offered: SVG code blocks, or
     none?" (the original's three destinations all require a filesystem).
-  - In the merged assets template: "Write maps and sessions under
+  - In the merged assets template: line 3 → "Fill this in during Turn 0 —
+    or answer and I hold it for you." (the source line addresses a human
+    editing a file; the Gem interviews instead); "Write maps and sessions under
     `.alvar/`" → "Maps and plans live in this chat"; "I read session
     markdown in: editor / Obsidian / other" → deleted (no session
     markdown); keep "Visuals: SVG when a picture would lock the idea".
