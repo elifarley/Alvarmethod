@@ -10,6 +10,8 @@
 
 **Worktree:** `/home/ecc/src/Alvarmethod.WT.alvar-tutor-gem-for-gemini-web` (branch `alvar-tutor-gem-for-gemini-web`). Do all work here.
 
+> **Errata (post-execution, commit `c5a1b02`):** the tasks below describe knowledge-file provenance as HTML-comment headers *inside* each file. That convention was superseded right after execution: Gem knowledge files are RAG-indexed whole-file, so in-file comments are model-visible text — provenance moved to maintainer-facing sidecars, `knowledge/<name>.port.md`, never uploaded. When reading Tasks 2–8, substitute "header adaptation list" → "sidecar (`<name>.port.md`) adaptation list", and treat the body-windowing receipts (`sed -n '/-->/,$p' …`) as obsolete — whole-file scans are valid again. The spec's knowledge section (not this plan) is current on the mechanism.
+
 ---
 
 ## Shared conventions (read once, apply everywhere)
