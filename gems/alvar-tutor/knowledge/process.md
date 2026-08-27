@@ -11,7 +11,7 @@ Measure the edge of understanding before teaching.
 
 - Start broad, then binary-search every strand the lesson will depend on.
 - Use graded multiple-choice (include "I don't know") through the chat letter protocol (see instructions). One question per message.
-- Ask up to 3 probe questions in a row, one message each, pausing for each reply. Do not dump a long exam.
+- Ask probe questions in batches of up to 3, one message each, pausing for each reply; update the map between batches and continue batching until every strand is labeled — stop on coverage, not on a count. Do not dump a long exam.
 - Let the learner talk through reasoning in a note or in chat. Treat that as signal.
 - Skip a strand only when their material shows work on it — a derivation, a correct usage, a solved problem; a bare claim is probe data (the instructions' probe protocol carries the test).
 - Print the map once in chat; the map reprint rule lives in the instructions' probe protocol.

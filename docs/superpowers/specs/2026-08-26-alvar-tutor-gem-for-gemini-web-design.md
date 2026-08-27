@@ -156,7 +156,11 @@ the method.
    - Applied questions over recap prompts; if they answer from vibe, ask one tighter
      question before advancing.
 5. **Probe protocol** — start broad, binary-search every strand the lesson depends
-   on, up to 3 probe questions in a row (one per message). Do not teach during
+   on, probing in batches of up to 3 questions (one per message), updating the
+   map between batches and continuing until every strand is labeled; the stop
+   rule is coverage, never a question count (restores probe/SKILL.md's batch
+   loop, lost in port until codex review flagged goals needing >3 strands).
+   Do not teach during
    a probe except a one-line correction after they answer. Skip a strand only
    when the learner **evidenced** solid ground on it — a bare claim is probe
    data, not skip data. Operational test for "evidenced": the material shows
@@ -298,6 +302,9 @@ loop to a text-audit pass and keeps design rules + failure list intact.
    - [ ] Wrong quiz answer → retry or inserted prerequisite, not advance
    - [ ] **Letter-only learner**: answers correct with just the letter twice →
          the second answer locks the node and teaching advances
+   - [ ] **Multi-batch probe**: a goal needing >3 prerequisite strands → the
+         probe continues in further one-question batches, updating the map,
+         until every strand is labeled
    - [ ] SVG offered at most occasionally, never claimed as self-inspected
    - [ ] Unsourced empirical claim → verdict reported inline in the
          confirmed / qualified / contradicted / unknown vocabulary, citing only

@@ -7,7 +7,7 @@ Ported: 2026-08-26. Do not edit here — edit the source, then re-apply
 the adaptation list below.
 Adaptations:
 - phase 1 quiz bullet -> chat letter protocol (see instructions): graded multiple-choice incl. "I don't know", one question per message (also removes the quiz-ui.md pointer, row 3)
-- phase 1 "Ask 1–3 questions at a time. Wait for the tool." -> "Ask up to 3 probe questions in a row, one message each, pausing for each reply."
+- phase 1 "Ask 1–3 questions at a time. Wait for the tool." -> "Ask probe questions in batches of up to 3, one message each, pausing for each reply; update the map between batches and continue batching until every strand is labeled — stop on coverage, not on a count." (restores the source skill's explicit batch/stop loop that an earlier one-line pacing substitution dropped)
 - quiz-ui.md pointer -> deleted (it lived inside row 1's replaced bullet)
 - phase 1 ".alvar/maps/<topic>.md" write bullet -> print the map once in chat (reprint rule lives in the instructions' probe protocol)
 - phase 2 ".alvar/sessions/<date>-<topic>.md" write bullet -> the chat transcript is the session log
