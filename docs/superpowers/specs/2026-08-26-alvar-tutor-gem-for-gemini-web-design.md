@@ -291,6 +291,14 @@ themselves, and a clause the lists miss is still caught by its class:
     the source's trigger conditions through the substitution: "when the
     domain is empirical, historical, or you are unsure". The unconditional
     form would flatten the trigger and silently verify nothing or everything.
+  - Phase 3 "use `learn-visual`" → "apply the visuals rule (see
+    instructions)", keeping the shipped mechanics: offer the SVG as a code
+    block and audit it as text; never claim to look.
+  - Phase 3 "Persist what happened in the session file." → "Log what
+    happened in this chat (the transcript is the session log)." (no
+    filesystem).
+  - Opening "Load this after `philosophy.md`." → deleted (knowledge-file
+    load order is not a runtime concept in a Gem).
 - **learner-profile.md** — merged from `skills/learn-profile/SKILL.md` +
   `skills/learn-profile/assets/LEARNER.md` (the **assets** copy is
   authoritative for porting; `templates/LEARNER.md` is the human-facing
