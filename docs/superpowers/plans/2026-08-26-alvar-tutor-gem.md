@@ -317,12 +317,12 @@ grep -c 'arrow' gems/alvar-tutor/knowledge/visual.md            # ≥ 2 (design 
 
 **Acceptance Criteria:**
 - [ ] Create-the-Gem steps (gemini.google.com → Explore Gems → New Gem → name "Alvar Tutor" → paste INSTRUCTIONS.md → upload the 5 knowledge files → Save) with the `wc -m` ≤ 4000 pre-paste gate
-- [ ] All 17 smoke items from spec §README (gems/alvar-tutor/) — Turn-0 profiling, one-question quiz, rotation, mermaid-before-teaching, one-step, map print/reprint (any change/insertion), mid-step resume, wrong-answer branch, SVG sparingly, verdict vocabulary, session-end summary, D-answer, prose degradation, huge-brief degradation, off-topic degradation, truncation canary (+ precondition + blind spot)
+- [ ] All 16 smoke items from spec §README (gems/alvar-tutor/) — Turn-0 profiling, one-question quiz, rotation, mermaid-before-teaching, one-step, map print/reprint (any change/insertion), mid-step resume, wrong-answer branch, SVG sparingly, verdict vocabulary, session-end summary, D-answer, prose degradation, huge-brief degradation, off-topic degradation, truncation canary (+ precondition + blind spot)
 - [ ] Credit line: method is Eero Alvar's (link the video); this repo implements
 
 **Verify:**
 ```bash
-grep -c '\- \[ \]' gems/alvar-tutor/README.md   # ≥ 17
+grep -c '\- \[ \]' gems/alvar-tutor/README.md   # ≥ 16 (the spec's checklist holds 16 items — an earlier "17" was a plan-time miscount)
 grep -c 'Alvar Tutor' gems/alvar-tutor/README.md  # ≥ 1
 grep -ci 'eero alvar' gems/alvar-tutor/README.md # ≥ 1
 ```
@@ -330,7 +330,7 @@ grep -ci 'eero alvar' gems/alvar-tutor/README.md # ≥ 1
 **Steps:**
 - [ ] **Step 1:** Write the README: 3 numbered sections (Create the Gem / Use / Smoke-test checklist) transcribing the checklist items from spec §"README.md (gems/alvar-tutor/)" verbatim.
 - [ ] **Step 2:** Run the Verify receipts.
-- [ ] **Step 3:** Commit — `feat(gem): gems/alvar-tutor/README.md — install + 17-item smoke checklist`.
+- [ ] **Step 3:** Commit — `feat(gem): gems/alvar-tutor/README.md — install + 16-item smoke checklist`.
 
 ---
 
