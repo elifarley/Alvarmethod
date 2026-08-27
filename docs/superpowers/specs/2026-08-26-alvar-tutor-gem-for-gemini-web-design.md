@@ -267,7 +267,10 @@ themselves, and a clause the lists miss is still caught by its class:
 
 - **philosophy.md** — ports **verbatim**. The 36-line source contains zero
   runtime references (no harness, tool, `.alvar/`, or skill mentions; its
-  only external reference is the youtu.be citation). Adaptation list: empty.
+  only external reference is the youtu.be citation). Adaptation list: one
+  provenance row — `- ports verbatim (no runtime references in source)` —
+  documenting intent, not changes, so a re-porter diffs against that
+  expectation instead of guessing.
 - **process.md** — port of `references/process.md` with these clause-level
   adaptations:
   - Phase 1 quiz bullet — replace the whole clause with: "Use graded
