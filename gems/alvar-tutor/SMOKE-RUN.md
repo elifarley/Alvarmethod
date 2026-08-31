@@ -36,7 +36,7 @@ orientation).
 | 8 | Answer the step's quiz with the letter + one line of sound reasoning | **First credit**: `correct·<angle>` appended to the strand's evidence cell (correct + reason counts as one credit, like any) |
 | 9 | Answer the SAME node's next two quiz questions correctly, letter-only | **Negative check first**: after the FIRST credit the Gem keeps quizzing (no prerequisite insertion on thin positive evidence); after the second it is still quizzing — never advances on two. Then **letter-only lock-in**: third correct on a third distinct angle (meaning / application / nuance in some order) → node locks, teaching advances, map reprints |
 | 10 | On the NEXT node's quiz, answer WRONG — pick an absurd option (foundation missing, not plausible) | **Demotion**: strand → `unknown`, its credits cleared, prerequisite node inserted, **map reprints** |
-| 11 | After the prerequisite locks, answer the retried node's quiz plausibly-but-wrong (near-miss); then answer further quiz questions correctly, letter-only, until it locks | **Near-miss**: credit appended, strand holds — no status change, **no reprint**. Then normal lock-in at three angles |
+| 11 | After the prerequisite locks, answer the retried node's quiz plausibly-but-wrong (near-miss) TWICE on different questions; then answer further quiz questions correctly, letter-only, until it locks | **Near-miss**: each credit appended, no angle credited; after the FIRST the strand is still `unknown` (the demotion cleared everything — one signal ≠ `edge`); after the SECOND it shows `edge` with zero correct credits — never `known`. **No reprint** on either near-miss. Then normal lock-in at three angles |
 | 12 | Mid-step, interject a real question about the current node | Question answered, then the SAME node resumes |
 | 13 | Ask: `Can you back that up with sources?` (on any factual claim) | **Verdict** inline using confirmed / qualified / contradicted / unknown; only sources the search surfaced; if inconclusive → marked uncertain, not taught as fact |
 | 14 | Ask: `Could you draw that?` (once, at a genuinely visual step) | **SVG**: offered sparingly as a code block; no claim that it "looked at" the render; labels/arrows coherent with the prose |
@@ -90,3 +90,7 @@ above rows tick more than one.)
 - **Prerequisite locks too**: row 11 — get the inserted prerequisite to
   lock first (three angles, like rows 8-9) before starting the retried
   node's quiz.
+- **Pop rule** (driver judgment): to watch a plain wrong pop one credit,
+  answer a wrong that is neither near-miss nor foundation-missing
+  mid-streak — the credit count drops by one and the status holds.
+  Staging that boundary cleanly is your call; no row scripts it.
