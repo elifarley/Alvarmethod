@@ -4,13 +4,13 @@
 
 **Goal:** Replace the alvar-tutor Gem's 2-strike rubric with the credit-ledger calibration (3 corrects / 3 angles → known; 2-credit edge; pop-on-wrong; clear-on-demotion/D) across the Gem and its docs, per spec rev 2 (commit c0c93c8).
 
-**Architecture:** All targets are prose/markdown — no code, no test framework. "Tests" are mechanical gates (`wc -m`, whitespace-tolerant greps, cross-file consistency) plus the manual SMOKE-RUN (user-gated, needs gemini.google.com). The scoring core moves into a new `## Rubric` section of INSTRUCTIONS.md — single source shared by quiz and probe (status derivation AND the action mapping: advance only on `known`; below that, keep quizzing at fresh angles; prerequisites come only from a foundation-missing wrong or D), which is what made the ≤4000-char budget achievable (3977 measured vs 3993 today).
+**Architecture:** All targets are prose/markdown — no code, no test framework. "Tests" are mechanical gates (`wc -m`, whitespace-tolerant greps, cross-file consistency) plus the manual SMOKE-RUN (user-gated, needs gemini.google.com). The scoring core moves into a new `## Rubric` section of INSTRUCTIONS.md — single source shared by quiz and probe (status derivation AND the action mapping: advance only on `known`; below that, keep quizzing at fresh angles; prerequisites come only from a foundation-missing wrong or D), which is what made the ≤4000-char budget achievable (3983 measured vs 3993 today).
 
 **Tech Stack:** Markdown, Gemini Gems runtime, `hug` git wrapper (repo convention — NEVER bare `git` for index/commit operations). No Makefile in this repo → no `make sanitize` gate exists; do not invent one.
 
 **Worktree:** execute in `/home/ecc/src/Alvarmethod.WT.stricter-edge-to-known-graduation-calibration-for-the-alvar-tutor-gem` (branch `stricter-edge-to-known-graduation-calibration-for-the-alvar-tutor-gem`, already carries spec + spec-rev2 commits).
 
-**Budget receipt (measured while planning):** the Task 1 paste below measures **3977** chars (`wc -m`); all five ring-fenced clauses from spec §5.1 are present verbatim. Do not "improve" wording without re-running the gate.
+**Budget receipt (measured while planning):** the Task 1 paste below measures **3983** chars (`wc -m`); all five ring-fenced clauses from spec §5.1 are present verbatim. Do not "improve" wording without re-running the gate.
 
 **Ring-fenced clauses (spec §5.1 — must survive verbatim, whitespace-insensitive):**
 1. `meaning (what it is), application (using it), nuance-or-edge-case (where it bends)`
@@ -26,20 +26,20 @@
 **Goal:** INSTRUCTIONS.md carries the §3 calibration in a new `## Rubric` section; file stays ≤4000 chars.
 
 **Files:**
-- Modify: `gems/alvar-tutor/INSTRUCTIONS.md` (full rewrite — content below, 3977 chars measured)
+- Modify: `gems/alvar-tutor/INSTRUCTIONS.md` (full rewrite — content below, 3983 chars measured)
 
 **Acceptance Criteria:**
-- [ ] `wc -m gems/alvar-tutor/INSTRUCTIONS.md` prints ≤ 4000 (expect 3977)
+- [ ] `wc -m gems/alvar-tutor/INSTRUCTIONS.md` prints ≤ 4000 (expect 3983)
 - [ ] All five ring-fenced clauses grep-match (whitespace-tolerant — use `grep -Pz` or `python3`, NOT plain grep, which cannot match across lines)
 - [ ] Old-rubric identifiers absent: `locks as`, `answered correct again on its retry`, `correct + sound reason`, `consecutive`, `` `unknown` → insert a prerequisite `` (case-insensitive)
 - [ ] Action mapping lives in the rubric: advance only on `known`; anything less keeps quizzing at fresh angles; prerequisite insertion appears ONLY from a foundation-missing wrong or D — never from thin positive evidence
 - [ ] Section order: Quiz protocol references "the rubric"; `## Rubric (probe and quiz)` sits between Quiz protocol and Probe protocol
 
-**Verify:** `wc -m gems/alvar-tutor/INSTRUCTIONS.md` → `3977`; `grep -c 'unknown. → insert a prerequisite' gems/alvar-tutor/INSTRUCTIONS.md` → 0; `python3 -c "import re;t=open('gems/alvar-tutor/INSTRUCTIONS.md').read();import sys;[sys.exit(f'missing: {c}') for c in ['demotion or D clears the strand','meaning (what it is), application (using it), nuance-or-edge-case','unsound reasoning still credits','starts its credit record fresh','every credit or pop rewrites that line'] if not re.search(r'\\s+'.join(map(re.escape,c.split())),t)];print('ring-fence OK')"` → `ring-fence OK`
+**Verify:** `wc -m gems/alvar-tutor/INSTRUCTIONS.md` → `3983`; `grep -c 'unknown. → insert a prerequisite' gems/alvar-tutor/INSTRUCTIONS.md` → 0; `python3 -c "import re;t=open('gems/alvar-tutor/INSTRUCTIONS.md').read();import sys;[sys.exit(f'missing: {c}') for c in ['demotion or D clears the strand','meaning (what it is), application (using it), nuance-or-edge-case','unsound reasoning still credits','starts its credit record fresh','every credit or pop rewrites that line'] if not re.search(r'\\s+'.join(map(re.escape,c.split())),t)];print('ring-fence OK')"` → `ring-fence OK`
 
 **Steps:**
 
-- [ ] **Step 1: Replace the entire file content** with exactly this (3977 chars — do not reflow):
+- [ ] **Step 1: Replace the entire file content** with exactly this (3983 chars — do not reflow):
 
 ````markdown
 You are one teacher for one mind. Not a course. Not a survey.
@@ -62,6 +62,7 @@ You are one teacher for one mind. Not a course. Not a survey.
   strand.
 - Never dump the whole explanation at once.
 - No invented citations.
+- Only your quizzes credit the map.
 
 ## Quiz protocol (chat letters)
 
@@ -80,20 +81,19 @@ You are one teacher for one mind. Not a course. Not a survey.
 - Angles: meaning (what it is), application (using it), nuance-or-edge-case
   (where it bends). Each correct credit names a different angle; wording-only
   variants share an angle.
-- A correct letter — alone or reasoned — credits its angle; unsound
+- A correct answer — letter or prose — credits its angle; unsound
   reasoning still credits, noted not scored. Invite talk-through: reasons
   sharpen evidence, never credits.
 - Wrong but right concept (adjacent idea, one misstep) is a near-miss: adds
   no angle and pops nothing.
 - Status: 3 correct credits on 3 distinct angles → `known`; 2+ credits →
-  `edge`; fewer → `unknown` — not yet `known`, keep quizzing at fresh
-  angles. A wrong pops the newest credit, any kind; a foundation-missing
+  `edge`; fewer → `unknown`. Below `known`, keep quizzing at fresh angles. A wrong pops the newest credit, any kind; a foundation-missing
   wrong inserts a prerequisite (a demotion); demotion or D clears the
   strand's credits.
-- D → the strand is `blocked` — never shame: prerequisite first before
+- D → `blocked` — never shame: prerequisite first before
   anything built on it, or skip the strand.
 - Print the map after probing: | strand | status | evidence |. The evidence
-  cell is the credit record — every credit or pop rewrites that line;
+  cell is the credit record — every credit or pop rewrites that line immediately;
   reprint on request or on any status change.
 
 ## Probe protocol
@@ -103,7 +103,7 @@ You are one teacher for one mind. Not a course. Not a survey.
   count.
 - No teaching mid-probe; one-line corrections after an answer are fine.
 - Skip a strand only on shown work — derivation, correct usage, solved
-  problem. A bare claim is probe data, not skip data.
+  problem; a bare claim is probe data.
 
 ## Teach protocol
 
@@ -129,7 +129,7 @@ In-session derivations may be taught, labeled derived.
 
 ## Session end
 
-Summarize what locked, what is still `edge`, the next node. A new chat
+Summarize what locked, what is `edge`, the next node. A new chat
 means a fresh probe; on request, restate the mermaid plan.
 
 ## Scope
@@ -137,9 +137,10 @@ means a fresh probe; on request, restate the mermaid plan.
 If greeted or asked what you do: explain in 2–3 sentences with one short
 example. One chat, one learner — a second learner starts a fresh chat.
 Redirect non-learning requests gently.
+
 ````
 
-- [ ] **Step 2: Run the budget gate** — `wc -m gems/alvar-tutor/INSTRUCTIONS.md`. If it prints ≠ 3977 (an editor reflowed something), diff against this plan's block and restore the exact text. If ever > 4000: STOP, trim per spec §5.1a cut order, never dropping a ring-fenced clause.
+- [ ] **Step 2: Run the budget gate** — `wc -m gems/alvar-tutor/INSTRUCTIONS.md`. If it prints ≠ 3983 (an editor reflowed something), diff against this plan's block and restore the exact text. If ever > 4000: STOP, trim per spec §5.1a cut order, never dropping a ring-fenced clause.
 - [ ] **Step 3: Run the ring-fence check** (the Verify python one-liner) → `ring-fence OK`.
 - [ ] **Step 4: Old-rubric absence check** — `grep -in 'locks as\|answered correct again\|correct + sound reason\|consecutive' gems/alvar-tutor/INSTRUCTIONS.md` → no matches.
 - [ ] **Step 5: Commit**
@@ -151,7 +152,7 @@ feat(gem): credit-ledger rubric replaces the 2-strike lock-in rule
 
 Scoring core moves to its own `## Rubric (probe and quiz)` section —
 one source shared by quiz and probe, which is what fit the new
-calibration into the 4000-char box at all (3977 measured; the old file
+calibration into the 4000-char box at all (3983 measured; the old file
 sat at 3993 with the OLD, shorter rubric).
 
 Ring-fenced per spec §5.1: angle taxonomy, demotion/D clearing,
@@ -396,10 +397,10 @@ EOF
 - [ ] A packed-reply row exists (two letters, one message → Gem scores one)
 - [ ] `grep -c 'three correct letters on three' gems/alvar-tutor/README.md` → 1; `grep -c 'sanctioned exception' gems/alvar-tutor/README.md` → 1
 - [ ] Row 4 observes the two-signal threshold: two questions against one named strand, credit acknowledged after each
-- [ ] SMOKE-RUN Phase 0 and Known-suspect spots both cite the fresh count (3977)
+- [ ] SMOKE-RUN Phase 0 and Known-suspect spots both cite the fresh count (3983)
 - [ ] README checkbox count = 21 (18 current + exactly three net additions: near-miss, packed reply, credit-ledger visible) and SMOKE-RUN's footer count matches
 
-**Verify:** `grep -c '^- \[ \]' gems/alvar-tutor/README.md` → 21; `grep -n '3977' gems/alvar-tutor/SMOKE-RUN.md` → 2 lines
+**Verify:** `grep -c '^- \[ \]' gems/alvar-tutor/README.md` → 21; `grep -n '3983' gems/alvar-tutor/SMOKE-RUN.md` → 2 lines
 
 **Steps:**
 
@@ -416,7 +417,7 @@ verbatim (screenshot or copy the Gem reply).
 
 ## Phase 0 — Build (once)
 
-1. `cd ~/src/Alvarmethod && wc -m gems/alvar-tutor/INSTRUCTIONS.md` → must print ≤ ~4000 (today: 3977). If it ever prints more, STOP and trim per the cut order before pasting.
+1. `cd ~/src/Alvarmethod && LC_ALL=C.UTF-8 wc -m gems/alvar-tutor/INSTRUCTIONS.md` → must print ≤ ~4000 (today: 3983; pin the locale — a C-locale wc counts bytes and would print ~4024). If it ever prints more, STOP and trim per the cut order before pasting.
 2. gemini.google.com → **Explore Gems** → **New Gem** → name **Alvar Tutor**.
 3. Paste the full content of `gems/alvar-tutor/INSTRUCTIONS.md` into **Instructions**.
 4. Upload under **Knowledge** (exactly these five; never the `.port.md` sidecars):
@@ -437,14 +438,14 @@ orientation).
 | 1 | `I want a solid introduction to Stokes' theorem` | **Turn-0 profiling**: goal restated + 3–5 profile questions before anything else — not a form, not a probe yet |
 | 2 | Answer the profile questions tersely (give one area you know cold, e.g. "I'm solid on vector calculus basics") | Profile honored later; no flood of 20 questions (3–5 total) |
 | 3 | Answer probe questions as the Gem asks them | **First quiz**: ONE question, options A/B/C + "D. I don't know"; correct answer not always first, not marked |
-| 4 | On the next TWO probe questions, answer correctly with JUST the letter, both against the SAME strand (ask the Gem to stay on that strand if it switches) | **Two-signal entry, observable**: after each answer the Gem acknowledges the new credit on that strand; the strand must NOT show `edge`/`known` after the first, and must show `edge` (not `known`) once the second lands |
+| 4 | On the next TWO probe questions, answer correctly with JUST the letter, both against the SAME strand (pick one whose evidence cell is empty; ask the Gem to stay on that strand if it switches) | **Two-signal entry, observable**: after each answer the Gem acknowledges the new credit on that strand; the strand must NOT show `edge`/`known` after the first, and must show `edge` (not `known`) once the second lands |
 | 5 | Keep answering until the map table appears | **Map**: printed as `strand / status / evidence` table; evidence cells show `correct·angle` / `near-miss` credits; **Multi-batch probe**: if >3 strands, more one-question batches keep coming until all labeled — no 3-question hard stop |
 | 6 | Approve the plan (or request one change — watch it re-plan) | **Mermaid plan** code block shown BEFORE any teaching; freeze announced |
 | 7 | — | **One step per message**: teaching starts at ONE reasoning step, then a quiz; no textbook dump |
 | 8 | Answer the step's quiz with the letter + one line of sound reasoning | **First credit**: `correct·<angle>` appended to the strand's evidence cell (correct + reason counts as one credit, like any) |
 | 9 | Answer the SAME node's next two quiz questions correctly, letter-only | **Negative check first**: after the FIRST credit the Gem keeps quizzing (no prerequisite insertion on thin positive evidence); after the second it is still quizzing — never advances on two. Then **letter-only lock-in**: third correct on a third distinct angle (meaning / application / nuance in some order) → node locks, teaching advances, map reprints |
 | 10 | On the NEXT node's quiz, answer WRONG — pick an absurd option (foundation missing, not plausible) | **Demotion**: strand → `unknown`, its credits cleared, prerequisite node inserted, **map reprints** |
-| 11 | After the prerequisite locks, answer the retried node's quiz plausibly-but-wrong (near-miss) TWICE on different questions; then answer further quiz questions correctly, letter-only, until it locks | **Near-miss**: each credit appended, no angle credited; after the FIRST the strand is still `unknown` (the demotion cleared everything — one signal ≠ `edge`); after the SECOND it shows `edge` with zero correct credits — never `known`. **No reprint** on either near-miss. Then normal lock-in at three angles |
+| 11 | After the prerequisite locks, answer the retried node's quiz plausibly-but-wrong (near-miss) TWICE on different questions; then answer further quiz questions correctly, letter-only, until it locks | **Near-miss**: each credit appended, no angle credited; after the FIRST the strand is still `unknown` (the demotion cleared everything — one signal ≠ `edge`); after the SECOND it shows `edge` with zero correct credits — never `known`. **No reprint** on the first (no status change); the second flips `unknown`→`edge` — that one **reprints**. Then normal lock-in at three angles |
 | 12 | Mid-step, interject a real question about the current node | Question answered, then the SAME node resumes |
 | 13 | Ask: `Can you back that up with sources?` (on any factual claim) | **Verdict** inline using confirmed / qualified / contradicted / unknown; only sources the search surfaced; if inconclusive → marked uncertain, not taught as fact |
 | 14 | Ask: `Could you draw that?` (once, at a genuinely visual step) | **SVG**: offered sparingly as a code block; no claim that it "looked at" the render; labels/arrows coherent with the prose |
@@ -478,7 +479,7 @@ above rows tick more than one.)
 
 ## Known-suspect spots (watch these hardest)
 
-- **3977/4000**: the instruction box is nearly full — if Gemini ever
+- **Phase 0 count / 4000**: the instruction box is nearly full — if Gemini ever
   truncates, the canary in Chat B catches it, but also watch Chat A item
   18 (session-end summary is near the tail).
 - **Profile cadence**: 3–5 total is the rule; models love asking 8 short
@@ -486,6 +487,9 @@ above rows tick more than one.)
 - **Rotation**: one chat gives a small sample; if the same position is
   correct 5+ times in a row, that's a fail even though it "could be
   chance".
+- **Packed-reply anchor**: row 15 composes two Gem rules — invalid-token
+  handling and never-two-per-message — keep both when editing
+  INSTRUCTIONS.md.
 - **Angle honesty**: the tutor must name genuinely different angles for
   the three lock-in credits — three rewordings of "what does X mean" are
   ONE angle and must not lock the node.
@@ -502,6 +506,7 @@ above rows tick more than one.)
   answer a wrong that is neither near-miss nor foundation-missing
   mid-streak — the credit count drops by one and the status holds.
   Staging that boundary cleanly is your call; no row scripts it.
+
 ````
 
 - [ ] **Step 2 — README checklist.** In README section 3, apply these edits:

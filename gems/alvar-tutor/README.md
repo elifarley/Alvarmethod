@@ -9,7 +9,8 @@ skills runtime needed.
 Budget gate first. Before pasting anything, run:
 
 ```bash
-wc -m gems/alvar-tutor/INSTRUCTIONS.md   # must print ≤ ~4000
+LC_ALL=C.UTF-8 wc -m gems/alvar-tutor/INSTRUCTIONS.md  # ≤ ~4000; pin the
+                                         # locale — C-locale wc counts bytes
 ```
 
 If it prints more than ~4000, stop and trim upstream: community reports of
@@ -65,9 +66,10 @@ build before calling it done.
      ANY status change or strand insertion, and the changed strand's
      evidence cell rewrites on every credit or pop (test with a
      foundation-missing wrong answer → demote + insert, then check the
-     table; a near-miss must NOT reprint)
-- [ ] **Near-miss**: plausible-but-wrong answer → one `near-miss` credit,
-     strand holds (no status change, no reprint)
+     table; a near-miss must NOT reprint while it does not flip status)
+- [ ] **Near-miss**: plausible-but-wrong answer → one `near-miss` credit;
+     the strand holds unless this is its second credit (two near-misses →
+     `edge` is correct and reprints)
 - [ ] **Credit ledger visible**: each credit or pop rewrites that strand's
      evidence cell in the same message — the cell is the running record
 - [ ] Mid-step question answered, then same node resumed
@@ -113,5 +115,5 @@ file's sidecar adaptation list (`knowledge/<name>.port.md` — maintainer-facing
 only, never uploaded to the Gem). Never edit the files in
 `gems/alvar-tutor/knowledge/` directly — EXCEPT for Gem-only deltas
 recorded in a sidecar adaptation list, which are the sanctioned exception;
-when re-porting, re-apply them verbatim (the source still carries the pack
-rubric).
+when re-porting, re-apply them verbatim — each sidecar entry carries its
+own do-not-clobber reason.

@@ -8,7 +8,7 @@ verbatim (screenshot or copy the Gem reply).
 
 ## Phase 0 — Build (once)
 
-1. `cd ~/src/Alvarmethod && wc -m gems/alvar-tutor/INSTRUCTIONS.md` → must print ≤ ~4000 (today: 3977). If it ever prints more, STOP and trim per the cut order before pasting.
+1. `cd ~/src/Alvarmethod && LC_ALL=C.UTF-8 wc -m gems/alvar-tutor/INSTRUCTIONS.md` → must print ≤ ~4000 (today: 3983; pin the locale — a C-locale wc counts bytes and would print ~4024). If it ever prints more, STOP and trim per the cut order before pasting.
 2. gemini.google.com → **Explore Gems** → **New Gem** → name **Alvar Tutor**.
 3. Paste the full content of `gems/alvar-tutor/INSTRUCTIONS.md` into **Instructions**.
 4. Upload under **Knowledge** (exactly these five; never the `.port.md` sidecars):
@@ -29,14 +29,14 @@ orientation).
 | 1 | `I want a solid introduction to Stokes' theorem` | **Turn-0 profiling**: goal restated + 3–5 profile questions before anything else — not a form, not a probe yet |
 | 2 | Answer the profile questions tersely (give one area you know cold, e.g. "I'm solid on vector calculus basics") | Profile honored later; no flood of 20 questions (3–5 total) |
 | 3 | Answer probe questions as the Gem asks them | **First quiz**: ONE question, options A/B/C + "D. I don't know"; correct answer not always first, not marked |
-| 4 | On the next TWO probe questions, answer correctly with JUST the letter, both against the SAME strand (ask the Gem to stay on that strand if it switches) | **Two-signal entry, observable**: after each answer the Gem acknowledges the new credit on that strand; the strand must NOT show `edge`/`known` after the first, and must show `edge` (not `known`) once the second lands |
+| 4 | On the next TWO probe questions, answer correctly with JUST the letter, both against the SAME strand (pick one whose evidence cell is empty; ask the Gem to stay on that strand if it switches) | **Two-signal entry, observable**: after each answer the Gem acknowledges the new credit on that strand; the strand must NOT show `edge`/`known` after the first, and must show `edge` (not `known`) once the second lands |
 | 5 | Keep answering until the map table appears | **Map**: printed as `strand / status / evidence` table; evidence cells show `correct·angle` / `near-miss` credits; **Multi-batch probe**: if >3 strands, more one-question batches keep coming until all labeled — no 3-question hard stop |
 | 6 | Approve the plan (or request one change — watch it re-plan) | **Mermaid plan** code block shown BEFORE any teaching; freeze announced |
 | 7 | — | **One step per message**: teaching starts at ONE reasoning step, then a quiz; no textbook dump |
 | 8 | Answer the step's quiz with the letter + one line of sound reasoning | **First credit**: `correct·<angle>` appended to the strand's evidence cell (correct + reason counts as one credit, like any) |
 | 9 | Answer the SAME node's next two quiz questions correctly, letter-only | **Negative check first**: after the FIRST credit the Gem keeps quizzing (no prerequisite insertion on thin positive evidence); after the second it is still quizzing — never advances on two. Then **letter-only lock-in**: third correct on a third distinct angle (meaning / application / nuance in some order) → node locks, teaching advances, map reprints |
 | 10 | On the NEXT node's quiz, answer WRONG — pick an absurd option (foundation missing, not plausible) | **Demotion**: strand → `unknown`, its credits cleared, prerequisite node inserted, **map reprints** |
-| 11 | After the prerequisite locks, answer the retried node's quiz plausibly-but-wrong (near-miss) TWICE on different questions; then answer further quiz questions correctly, letter-only, until it locks | **Near-miss**: each credit appended, no angle credited; after the FIRST the strand is still `unknown` (the demotion cleared everything — one signal ≠ `edge`); after the SECOND it shows `edge` with zero correct credits — never `known`. **No reprint** on either near-miss. Then normal lock-in at three angles |
+| 11 | After the prerequisite locks, answer the retried node's quiz plausibly-but-wrong (near-miss) TWICE on different questions; then answer further quiz questions correctly, letter-only, until it locks | **Near-miss**: each credit appended, no angle credited; after the FIRST the strand is still `unknown` (the demotion cleared everything — one signal ≠ `edge`); after the SECOND it shows `edge` with zero correct credits — never `known`. **No reprint** on the first (no status change); the second flips `unknown`→`edge` — that one **reprints**. Then normal lock-in at three angles |
 | 12 | Mid-step, interject a real question about the current node | Question answered, then the SAME node resumes |
 | 13 | Ask: `Can you back that up with sources?` (on any factual claim) | **Verdict** inline using confirmed / qualified / contradicted / unknown; only sources the search surfaced; if inconclusive → marked uncertain, not taught as fact |
 | 14 | Ask: `Could you draw that?` (once, at a genuinely visual step) | **SVG**: offered sparingly as a code block; no claim that it "looked at" the render; labels/arrows coherent with the prose |
@@ -70,7 +70,7 @@ above rows tick more than one.)
 
 ## Known-suspect spots (watch these hardest)
 
-- **3977/4000**: the instruction box is nearly full — if Gemini ever
+- **Phase 0 count / 4000**: the instruction box is nearly full — if Gemini ever
   truncates, the canary in Chat B catches it, but also watch Chat A item
   18 (session-end summary is near the tail).
 - **Profile cadence**: 3–5 total is the rule; models love asking 8 short
@@ -78,6 +78,9 @@ above rows tick more than one.)
 - **Rotation**: one chat gives a small sample; if the same position is
   correct 5+ times in a row, that's a fail even though it "could be
   chance".
+- **Packed-reply anchor**: row 15 composes two Gem rules — invalid-token
+  handling and never-two-per-message — keep both when editing
+  INSTRUCTIONS.md.
 - **Angle honesty**: the tutor must name genuinely different angles for
   the three lock-in credits — three rewordings of "what does X mean" are
   ONE angle and must not lock the node.

@@ -188,20 +188,12 @@ the method.
 
    | answer | credit |
    |---|---|
-   | correct — letter alone or reasoned, on a fresh question | one
-     `correct·angle` credit; each correct credit names a different angle
-     (meaning / application / nuance-or-edge-case); wording-only variants
-     share an angle |
-   | correct letter, unsound reasoning | still credits the letter's angle;
-     the reasoning is noted, not scored |
-   | wrong, near-miss (right concept, wrong detail) | one `near-miss`
-     credit — never adds an angle, never pops |
+   | correct — letter alone or reasoned, on a fresh question | one `correct·angle` credit; each correct credit names a different angle (meaning / application / nuance-or-edge-case); wording-only variants share an angle |
+   | correct letter, unsound reasoning | still credits the letter's angle; the reasoning is noted, not scored |
+   | wrong, near-miss (right concept, wrong detail) | one `near-miss` credit — never adds an angle, never pops |
    | wrong | pops the newest credit of any kind |
-   | wrong, foundation missing | demote `unknown`; credits cleared;
-     insert a prerequisite |
-   | I don't know (D) | `blocked`; credits cleared |
-
-   Status from the evidence cell: 3 correct credits on 3 distinct angles →
+   | wrong, foundation missing | demote `unknown`; credits cleared; insert a prerequisite |
+   | I don't know (D) | `blocked`; credits cleared | Status from the evidence cell: 3 correct credits on 3 distinct angles →
    `known`; 2+ credits → `edge`; fewer → `unknown`. A taught node starts a
    fresh credit record — probe statuses only order the DAG. (Table
    amended 2026-08-31 — delta (c).)
@@ -307,7 +299,10 @@ loop to a text-audit pass and keeps design rules + failure list intact.
    **"Alvar Tutor"** → paste `INSTRUCTIONS.md` → upload the 5 `knowledge/` files →
    Save. (Free tier works; note that Gem quality improves on Advanced.)
 2. **Use**: open a fresh chat with the Gem, state a learning goal.
-3. **Smoke-test checklist** (the regression test — manual by nature):
+3. **Smoke-test checklist** (the regression test — manual by nature).
+   > Frozen snapshot (2026-08-31), non-normative: the live checklist is
+   `gems/alvar-tutor/README.md` §3 — items below predate the credit-ledger
+   amendment where not dated and are kept as design history:
    - [ ] **Turn-0 profiling**: fresh chat → 3–5 profile questions (covering
          the clusters: solid ground, goal, pace, struggle, voice, visuals)
          before the probe, and later teaching visibly honors them

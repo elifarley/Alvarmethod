@@ -46,7 +46,8 @@ Walk the DAG. One node per turn.
 
 - Quiz after every node, not "at the end."
 - Prefer a short applied question over a recap prompt.
-- If they answer from vibe, rotate to a fresh angle before crediting.
+- If they answer from vibe, credit it per the rubric, then ask the next
+  question at a fresh angle.
 
 ## What the system absorbs
 
