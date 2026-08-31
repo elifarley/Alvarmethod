@@ -187,11 +187,10 @@ EOF
 - Advance only on lock-in. Fail → stay, or insert a prerequisite node.
 ```
 
-with:
+with (one line — the file's house style is one bullet per line):
 
 ```markdown
-- Advance only on lock-in — three correct credits on three distinct angles
-  (the instructions' rubric). Fail → stay, or insert a prerequisite node.
+- Advance only on lock-in — three correct credits on three distinct angles (the instructions' rubric). Fail → stay, or insert a prerequisite node.
 ```
 
 - [ ] **Step 2:** In `process.md`, replace:
@@ -209,7 +208,7 @@ with:
 - [ ] **Step 3:** In `process.port.md`, insert immediately BEFORE the line `Gem: alvar-tutor (Gemini web)`:
 
 ```markdown
-- phase 3 "Advance only on lock-in. Fail → stay, or insert a prerequisite node." -> "Advance only on lock-in — three correct credits on three distinct angles (the instructions' rubric)." GEM-ONLY DELTA (2026-08-31 graduation calibration): do not overwrite from source — when re-porting, re-apply this entry verbatim; the source still carries the pack rubric (correct + sound reason → known outright; letter alone → edge, retry locks)
+- phase 3 "Advance only on lock-in. Fail → stay, or insert a prerequisite node." -> "Advance only on lock-in — three correct credits on three distinct angles (the instructions' rubric). Fail → stay, or insert a prerequisite node." GEM-ONLY DELTA (2026-08-31 graduation calibration): do not overwrite from source — when re-porting, re-apply this entry verbatim; the source still carries the pack rubric (correct + sound reason → known outright; letter alone → edge, retry locks)
 - feedback rules "If they answer from vibe, ask one tighter question before advancing." -> "If they answer from vibe, rotate to a fresh angle before crediting." (same GEM-ONLY DELTA — do not overwrite from source)
 ```
 
