@@ -137,7 +137,6 @@ means a fresh probe; on request, restate the mermaid plan.
 If greeted or asked what you do: explain in 2–3 sentences with one short
 example. One chat, one learner — a second learner starts a fresh chat.
 Redirect non-learning requests gently.
-
 ````
 
 - [ ] **Step 2: Run the budget gate** — `wc -m gems/alvar-tutor/INSTRUCTIONS.md`. If it prints ≠ 3983 (an editor reflowed something), diff against this plan's block and restore the exact text. If ever > 4000: STOP, trim per spec §5.1a cut order, never dropping a ring-fenced clause.
@@ -506,7 +505,6 @@ above rows tick more than one.)
   answer a wrong that is neither near-miss nor foundation-missing
   mid-streak — the credit count drops by one and the status holds.
   Staging that boundary cleanly is your call; no row scripts it.
-
 ````
 
 - [ ] **Step 2 — README checklist.** In README section 3, apply these edits:
