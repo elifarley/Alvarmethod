@@ -378,7 +378,7 @@ reader expects (roast F-010).
 EOF
 ```
 
-**Execution note (added during implementation):** a seventh replacement was applied beyond the plan's original six — the README smoke-checklist section of the amended spec (≈ line 323) still asserted the old rule ("**Letter-only learner**: answers correct with just the letter twice → the second answer locks the node and teaching advances"); it is restated as the three-angle bar with a negative check, dated "amended 2026-08-31". The roast's F-003 cited three stale passages; this was a fourth, missed by both the roast and the original plan.
+**Execution note (added during implementation):** beyond the plan's original six replacements, the amended spec's own README smoke-checklist section carried FOUR stale items (letter-only "letter twice"; map-print reprint test keyed to a plain wrong; "Wrong quiz answer → retry"; D-answer without credits-cleared). All four are restated under the credit ledger and dated "amended 2026-08-31". The roast's F-003 cited three stale passages; the spec's smoke list was a further four, missed by both the roast and the original plan — lesson: when a spec embeds a copy of another artifact's checklist, sweeping the normative section is not enough.
 
 ---
 
