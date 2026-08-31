@@ -142,8 +142,9 @@ the method.
      marked, never hinted by wording.
    - Never reveal the answer before the learner replies. No second question in the
      same message.
-   - On reply: score against the probe rubric (§5): `known` → next node;
-     `edge` → retry; `unknown` → insert a prerequisite. "D" marks the
+   - On reply: score against the calibration (item 5): `known` → next
+     node; anything less → fresh-angle questions; prerequisites come only
+     from a foundation-missing wrong or D. "D" marks the
      strand `blocked` — do not guess, do not shame; it's map data.
      (Three deltas from the pack's rubric, advertised: **(a)** row 2
      is not the pack's "correct, thin reason | edge" — a bare correct
@@ -320,7 +321,8 @@ loop to a text-audit pass and keeps design rules + failure list intact.
          ANY status change or strand insertion, and the changed strand's
          evidence cell rewrites on every credit or pop (test with a
          foundation-missing wrong answer → demote + insert, then check the
-         table; a near-miss must NOT reprint) (amended 2026-08-31)
+         table; a near-miss must NOT reprint while it does not flip
+         status) (amended 2026-08-31)
    - [ ] Mid-step question answered, then same node resumed
    - [ ] Foundation-missing wrong → demote `unknown`, credits cleared,
          prerequisite inserted, not advance (amended 2026-08-31)
