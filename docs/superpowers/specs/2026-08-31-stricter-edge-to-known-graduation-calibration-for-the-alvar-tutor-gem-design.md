@@ -154,7 +154,9 @@ status change (existing rule, unchanged in trigger, rarer in practice).
    Quiz protocol + Probe protocol to §3.
    **Budget gate: `wc -m` ≤ 4000 (today: 3993 — 7 chars of headroom).**
    The new text is longer than the old, so a **cut list is mandatory**
-   (§5.1a). **Ring-fenced clauses — never compressible, present verbatim:**
+   (§5.1a; amended 2026-08-31: the shipped paste landed at 3983 — 10 under
+   the old 3993 — so the cut list never fired as a gate, though the §5.1a
+   compressions shipped anyway as part of the rewrite). **Ring-fenced clauses — never compressible, present verbatim:**
    the angle taxonomy with its three values; the clearing rule ("demotion
    or D clears the strand's credits"); the letter-only credit rule (correct
    letter with unsound reasoning still credits); the fresh-ledger-on-teach
@@ -191,7 +193,9 @@ status change (existing rule, unchanged in trigger, rarer in practice).
    line ("Advance only on lock-in" → lock-in defined by §3's bar) and the
    feedback-rules section (quiz rotates angles until the strand locks; the
    vibe line "if they answer from vibe, ask one tighter question" becomes
-   "rotate to a fresh angle before crediting"). Phase 1 has no advancement
+   "credit it per the rubric, then ask the next question at a fresh
+   angle" — wording as shipped 2026-08-31, superseding the oracle's first
+   draft "rotate to a fresh angle before crediting"). Phase 1 has no advancement
    language (verified: `process.md:8-20`) — nothing to change there; Phase
    2's "Start from `known`" stays (rationale in §4).
 3. **`gems/alvar-tutor/knowledge/process.port.md`** (sidecar) — add one

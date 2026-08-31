@@ -193,7 +193,9 @@ the method.
    | wrong, near-miss (right concept, wrong detail) | one `near-miss` credit — never adds an angle, never pops |
    | wrong | pops the newest credit of any kind |
    | wrong, foundation missing | demote `unknown`; credits cleared; insert a prerequisite |
-   | I don't know (D) | `blocked`; credits cleared | Status from the evidence cell: 3 correct credits on 3 distinct angles →
+   | I don't know (D) | `blocked`; credits cleared |
+
+   Status from the evidence cell: 3 correct credits on 3 distinct angles →
    `known`; 2+ credits → `edge`; fewer → `unknown`. A taught node starts a
    fresh credit record — probe statuses only order the DAG. (Table
    amended 2026-08-31 — delta (c).)

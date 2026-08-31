@@ -173,11 +173,16 @@ EOF
 
 **Acceptance Criteria:**
 - [ ] `grep -c 'three correct credits on three distinct angles' gems/alvar-tutor/knowledge/process.md` → 1
-- [ ] `grep -c 'rotate to a fresh angle before crediting' gems/alvar-tutor/knowledge/process.md` → 1
+- [ ] `grep -c 'credit it per the rubric' gems/alvar-tutor/knowledge/process.md` → 1
 - [ ] `grep -c 'GEM-ONLY DELTA' gems/alvar-tutor/knowledge/process.port.md` → ≥ 2 (once per entry, both inside the adaptation list)
 - [ ] Sidecar `Source of truth` pin and `Ported:` line untouched
 
 **Verify:** `grep -n 'Advance only on lock-in\|answer from vibe' gems/alvar-tutor/knowledge/process.md` → both lines show the new wording; `grep -c 'do not overwrite from source' gems/alvar-tutor/knowledge/process.port.md` → 2
+
+**Execution note (folded 2026-08-31, 4b24337):** the pre-landing oracle reworded
+the vibe line after this task was drafted; the shipped wording ("credit it per
+the rubric, then ask the next question at a fresh angle") supersedes the
+original draft — Steps 2-3 below already carry the shipped text.
 
 **Steps:**
 
@@ -202,14 +207,15 @@ with (one line — the file's house style is one bullet per line):
 with:
 
 ```markdown
-- If they answer from vibe, rotate to a fresh angle before crediting.
+- If they answer from vibe, credit it per the rubric, then ask the next
+  question at a fresh angle.
 ```
 
 - [ ] **Step 3:** In `process.port.md`, insert immediately BEFORE the line `Gem: alvar-tutor (Gemini web)`:
 
 ```markdown
 - phase 3 "Advance only on lock-in. Fail → stay, or insert a prerequisite node." -> "Advance only on lock-in — three correct credits on three distinct angles (the instructions' rubric). Fail → stay, or insert a prerequisite node." GEM-ONLY DELTA (2026-08-31 graduation calibration): do not overwrite from source — when re-porting, re-apply this entry verbatim; the source still carries the pack rubric (correct + sound reason → known outright; letter alone → edge, retry locks)
-- feedback rules "If they answer from vibe, ask one tighter question before advancing." -> "If they answer from vibe, rotate to a fresh angle before crediting." (same GEM-ONLY DELTA — do not overwrite from source)
+- feedback rules "If they answer from vibe, ask one tighter question before advancing." -> "If they answer from vibe, credit it per the rubric, then ask the next question at a fresh angle." GEM-ONLY DELTA (2026-08-31 graduation calibration): do not overwrite from source — when re-porting, re-apply this entry verbatim; the source still carries the pack rubric
 ```
 
 - [ ] **Step 4: Commit**
@@ -396,10 +402,12 @@ EOF
 - [ ] A packed-reply row exists (two letters, one message → Gem scores one)
 - [ ] `grep -c 'three correct letters on three' gems/alvar-tutor/README.md` → 1; `grep -c 'sanctioned exception' gems/alvar-tutor/README.md` → 1
 - [ ] Row 4 observes the two-signal threshold: two questions against one named strand, credit acknowledged after each
-- [ ] SMOKE-RUN Phase 0 and Known-suspect spots both cite the fresh count (3983)
+- [ ] SMOKE-RUN Phase 0 cites the fresh count (3983); Known-suspect spots
+      reference it as "Phase 0 count / 4000" (deliberately deduplicated —
+      one canonical citation)
 - [ ] README checkbox count = 21 (18 current + exactly three net additions: near-miss, packed reply, credit-ledger visible) and SMOKE-RUN's footer count matches
 
-**Verify:** `grep -c '^- \[ \]' gems/alvar-tutor/README.md` → 21; `grep -n '3983' gems/alvar-tutor/SMOKE-RUN.md` → 2 lines
+**Verify:** `grep -c '^- \[ \]' gems/alvar-tutor/README.md` → 21; `grep -n '3983' gems/alvar-tutor/SMOKE-RUN.md` → 1 line
 
 **Steps:**
 
@@ -644,7 +652,7 @@ grep -rn --include='*.md' -i 'locks as .known.\|answered correct again\|correct 
   gems/ skills/ CONTRIBUTING.md docs/superpowers/specs/ | grep -v '2026-08-31-stricter'
 ```
 
-Expected hits ONLY in: `skills/probe/SKILL.md`, `skills/alvar-learn/**`, `CONTRIBUTING.md` (pack baseline — deliberately untouched), `docs/superpowers/specs/2026-08-26-*` ONLY inside the rewritten delta-(a) sentence and delta-(c) description (they NAME the old rule to replace it). Any hit inside `gems/` other than those two spec lines is a miss — fix forward.
+Expected hits ONLY in: `skills/probe/SKILL.md`, `skills/alvar-learn/**`, `CONTRIBUTING.md` (pack baseline — deliberately untouched), `docs/superpowers/specs/2026-08-26-*` ONLY inside the rewritten delta-(a) sentence and delta-(c) description (they NAME the old rule to replace it), and `gems/alvar-tutor/knowledge/process.port.md` ONLY inside its `GEM-ONLY DELTA` do-not-clobber reason (it names the old pack rubric precisely to forbid re-porting it). Any hit inside `gems/` other than those is a miss — fix forward.
 - [ ] **Step 3 — numeric agreement:** the three numbers (3 correct credits / 3 distinct angles; 2+ credits → edge; ≤4000 budget) appear consistently in INSTRUCTIONS.md rubric, spec §3 table, SMOKE-RUN rows 4/9, README checkboxes 9/11. Spot-check with `grep -n '3 correct credits\|three distinct angles\|2+ credits' gems/alvar-tutor/INSTRUCTIONS.md docs/superpowers/specs/2026-08-26-*.md gems/alvar-tutor/README.md`.
 - [ ] **Step 4:** if every gate passed, no commit is needed (read-only task). If a check failed and was fixed, commit the fix as its own commit — never amend.
 

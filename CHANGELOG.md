@@ -21,6 +21,11 @@ Format based on Keep a Changelog; versions are MAJOR.MINOR.PATCH.MICRO
   packed-reply probes. README checklist updated to match.
 - 2026-08-26 design spec amended (delta (c)): rubric table replaced by
   the credit ledger, stale old-rubric passages repaired.
+- Hard rule: only the Gem's own quizzes credit the map — pasted or
+  self-reported answers never touch the strand ledger (injection guard).
+- Budget gate is locale-pinned: the gem README and runbook now say
+  `LC_ALL=C.UTF-8 wc -m` — a bare C-locale `wc -m` counts bytes, not
+  characters, and would wrongly fail the 4000 gate.
 
 ### Added
 - Gem-only-delta carve-out in the contributor workflow: knowledge-file
