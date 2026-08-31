@@ -489,6 +489,15 @@ above rows tick more than one.)
 - **Angle honesty**: the tutor must name genuinely different angles for
   the three lock-in credits — three rewordings of "what does X mean" are
   ONE angle and must not lock the node.
+- **Fresh start**: when teaching begins, the node's evidence cell starts
+  empty — probe-phase credits vanish by design (a taught node starts
+  fresh). That is the rubric working, not a ledger failure.
+- **Reprints**: any status change reprints the full map — including
+  `unknown`→`edge` at the second credit — before the bigger one at the
+  lock.
+- **Prerequisite locks too**: row 11 — get the inserted prerequisite to
+  lock first (three angles, like rows 8-9) before starting the retried
+  node's quiz.
 ````
 
 - [ ] **Step 2 — README checklist.** In README section 3, apply these edits:
