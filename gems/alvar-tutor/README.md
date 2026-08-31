@@ -60,13 +60,24 @@ build before calling it done.
 - [ ] Correct answer not always first / not marked
 - [ ] Mermaid plan (code block) shown BEFORE any teaching
 - [ ] One reasoning step per message; no textbook dump
-- [ ] Strand map printed as a table after probing; reprinted on request
-     and after ANY status change or strand insertion (test with a wrong
-     answer → retry/insert, then check the table)
+- [ ] Strand map printed as a table after probing; evidence cells show
+     `correct·angle` / `near-miss` credits; reprinted on request, after
+     ANY status change or strand insertion, and the changed strand's
+     evidence cell rewrites on every credit or pop (test with a
+     foundation-missing wrong answer → demote + insert, then check the
+     table; a near-miss must NOT reprint)
+- [ ] **Near-miss**: plausible-but-wrong answer → one `near-miss` credit,
+     strand holds (no status change, no reprint)
+- [ ] **Credit ledger visible**: each credit or pop rewrites that strand's
+     evidence cell in the same message — the cell is the running record
 - [ ] Mid-step question answered, then same node resumed
-- [ ] Wrong quiz answer → retry or inserted prerequisite, not advance
-- [ ] **Letter-only learner**: answers correct with just the letter twice →
-      the second answer locks the node and teaching advances
+- [ ] Foundation-missing wrong → demote `unknown`, credits cleared,
+     prerequisite inserted, not advance
+- [ ] **Letter-only learner**: three correct letters on three different
+      angles lock the node and teaching advances; two correct answers
+      never advance a node (negative check)
+- [ ] **Packed reply**: two letters in one message → Gem scores one and
+      asks for a single letter
 - [ ] **Multi-batch probe**: a goal needing >3 prerequisite strands → the
       probe continues in further one-question batches, updating the map,
       until every strand is labeled
@@ -76,7 +87,8 @@ build before calling it done.
      surfaced sources; never taught as fact when unverified
 - [ ] Session end summary: locked / edge / next node
 - [ ] **D answer**: answer "D. I don't know" once → strand marked `blocked`,
-     no advance, no shame language, prerequisite inserted or strand skipped
+     its credits cleared, no advance, no shame language, prerequisite
+     inserted or strand skipped
 - [ ] **Degradation — prose answer**: answer a quiz in prose instead of a
      letter → scored as signal, letter protocol restated once, no nagging
 - [ ] **Degradation — huge brief**: paste a large background brief → the
@@ -99,4 +111,7 @@ This repo implements it as agent skills plus this Gem: see [the source pack](../
 Contributors: edit the source `skills/…`, then re-port per each knowledge
 file's sidecar adaptation list (`knowledge/<name>.port.md` — maintainer-facing
 only, never uploaded to the Gem). Never edit the files in
-`gems/alvar-tutor/knowledge/` directly.
+`gems/alvar-tutor/knowledge/` directly — EXCEPT for Gem-only deltas
+recorded in a sidecar adaptation list, which are the sanctioned exception;
+when re-porting, re-apply them verbatim (the source still carries the pack
+rubric).
