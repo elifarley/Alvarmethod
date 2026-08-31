@@ -516,17 +516,17 @@ above rows tick more than one.)
      answer → retry/insert, then check the table)
 ```
 
-with:
+with (map checkbox trimmed to its own scope per the advisory round —
+Near-miss and Credit-ledger items own their rules):
 
 ```markdown
 - [ ] Strand map printed as a table after probing; evidence cells show
-     `correct·angle` / `near-miss` credits; reprinted on request, after
-     ANY status change or strand insertion, and the changed strand's
-     evidence cell rewrites on every credit or pop (test with a
-     foundation-missing wrong answer → demote + insert, then check the
-     table; a near-miss must NOT reprint)
-- [ ] **Near-miss**: plausible-but-wrong answer → one `near-miss` credit,
-     strand holds (no status change, no reprint)
+     `correct·angle` / `near-miss` credits; reprinted on request and after
+     ANY status change or strand insertion (reprint test: foundation-missing
+     wrong answer → demote + insert, then check the table)
+- [ ] **Near-miss**: plausible-but-wrong answer → one `near-miss` credit;
+     the strand holds unless this is its second credit (two near-misses →
+     `edge` is correct and reprints)
 - [ ] **Credit ledger visible**: each credit or pop rewrites that strand's
      evidence cell in the same message — the cell is the running record
 ```

@@ -1,6 +1,6 @@
 {
   "name": "alvarmethod",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "One-to-one AI teaching skills (Alvar method) for Codex, Claude Code, Grok, Pi, and OpenCode",
   "bin": {
     "alvarmethod": "bin/alvarmethod.js"

@@ -62,11 +62,9 @@ build before calling it done.
 - [ ] Mermaid plan (code block) shown BEFORE any teaching
 - [ ] One reasoning step per message; no textbook dump
 - [ ] Strand map printed as a table after probing; evidence cells show
-     `correct·angle` / `near-miss` credits; reprinted on request, after
-     ANY status change or strand insertion, and the changed strand's
-     evidence cell rewrites on every credit or pop (test with a
-     foundation-missing wrong answer → demote + insert, then check the
-     table; a near-miss must NOT reprint while it does not flip status)
+     `correct·angle` / `near-miss` credits; reprinted on request and after
+     ANY status change or strand insertion (reprint test: foundation-missing
+     wrong answer → demote + insert, then check the table)
 - [ ] **Near-miss**: plausible-but-wrong answer → one `near-miss` credit;
      the strand holds unless this is its second credit (two near-misses →
      `edge` is correct and reprints)
