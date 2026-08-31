@@ -51,7 +51,9 @@ shows the plan before teaching. A new chat means a fresh probe.
 ## 3. Smoke-test checklist
 
 The regression test — manual by nature. Run every item against a fresh Gem
-build before calling it done.
+build before calling it done. A scripted two-chat walkthrough of these
+checkboxes, with the known-suspect spots to watch hardest, lives in
+[SMOKE-RUN.md](SMOKE-RUN.md).
 
 - [ ] **Turn-0 profiling**: fresh chat → 3–5 profile questions (covering
      the clusters: solid ground, goal, pace, struggle, voice, visuals)
