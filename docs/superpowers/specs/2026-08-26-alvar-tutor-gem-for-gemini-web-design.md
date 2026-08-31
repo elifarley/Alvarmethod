@@ -320,8 +320,9 @@ loop to a text-audit pass and keeps design rules + failure list intact.
          answer → retry/insert, then check the table)
    - [ ] Mid-step question answered, then same node resumed
    - [ ] Wrong quiz answer → retry or inserted prerequisite, not advance
-   - [ ] **Letter-only learner**: answers correct with just the letter twice →
-         the second answer locks the node and teaching advances
+   - [ ] **Letter-only learner**: three correct letters on three different
+         angles lock the node and teaching advances; two correct answers
+         never advance a node (amended 2026-08-31)
    - [ ] **Multi-batch probe**: a goal needing >3 prerequisite strands → the
          probe continues in further one-question batches, updating the map,
          until every strand is labeled
