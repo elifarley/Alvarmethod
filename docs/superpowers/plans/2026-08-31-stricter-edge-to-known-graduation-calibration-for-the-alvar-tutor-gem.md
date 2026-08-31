@@ -246,6 +246,7 @@ EOF
 - [ ] `grep -c 'delta (c)' docs/superpowers/specs/2026-08-26-*.md` → ≥ 1; `grep -c 'Three deltas' docs/superpowers/specs/2026-08-26-*.md` → 1
 - [ ] Zero matches for `locks as \`known\` when answered correct again`, `ask one tighter`, and `wrong reason is \`edge\`` in that file
 - [ ] The item-5 table contains `pops the newest credit` and `credits cleared`
+- [ ] `grep -c 'letter twice' <file>` → 0 (smoke item amended to the three-angle bar; added during execution — the roast missed it)
 - [ ] No bare `§4 above` / `§5` cross-references remain in the two amended blocks (use "item 4 above" / "item 5")
 
 **Verify:** `grep -n 'amended 2026-08-31\|Three deltas' docs/superpowers/specs/2026-08-26-alvar-tutor-gem-for-gemini-web-design.md` → four+ dated markers (delta (a) rewrite, delta (c), table footnote, evidence-cell note)
@@ -271,7 +272,7 @@ advertised: **(a)** row 2 is not the
      answers count fully (amended 2026-08-31 by delta (c));
 ```
 
-- [ ] **Step 2 — delta count + delta (c).** Replace `(Two\n     deltas from the pack's rubric, advertised:` with `(Three\n     deltas from the pack's rubric, advertised:`; then replace:
+- [ ] **Step 2 — delta count + delta (c).** Replace `(Two\n     deltas from the pack's rubric, advertised:` with `(Three deltas from\n     the pack's rubric, advertised:` (keep `Three deltas` on one line — the verify greps are line-based); then replace:
 
 ```markdown
 never applies in a runtime with no tools.)
@@ -280,8 +281,8 @@ never applies in a runtime with no tools.)
 with:
 
 ```markdown
-never applies in a runtime with no tools; **(c)** amended
-     2026-08-31: the rubric itself is replaced by the stricter credit-
+never applies in a runtime with no tools; **(c)** amended 2026-08-31:
+     the rubric itself is replaced by the stricter credit-
      ledger calibration (docs/superpowers/specs/2026-08-31-stricter-
      edge-to-known-graduation-calibration-for-the-alvar-tutor-gem-
      design.md §3) — graduation needs three correct credits on three
@@ -376,6 +377,8 @@ and the item-5 table is the credit ledger. Cross-references use
 reader expects (roast F-010).
 EOF
 ```
+
+**Execution note (added during implementation):** a seventh replacement was applied beyond the plan's original six — the README smoke-checklist section of the amended spec (≈ line 323) still asserted the old rule ("**Letter-only learner**: answers correct with just the letter twice → the second answer locks the node and teaching advances"); it is restated as the three-angle bar with a negative check, dated "amended 2026-08-31". The roast's F-003 cited three stale passages; this was a fourth, missed by both the roast and the original plan.
 
 ---
 
