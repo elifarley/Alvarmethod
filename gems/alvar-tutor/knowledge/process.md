@@ -37,7 +37,7 @@ Walk the DAG. One node per turn.
 - One reasoning step. Stop. Do not rush the whole graph (that is the ChatGPT failure mode).
 - If a picture would lock the idea, apply the visuals rule (see instructions): offer the SVG as a code block and audit it as text; never claim to look.
 - After the step, quiz that step. Three reasons: they cannot gaslight themselves; you stay calibrated; applying the idea is how it locks in.
-- Advance only on lock-in. Fail → stay, or insert a prerequisite node.
+- Advance only on lock-in — three correct credits on three distinct angles (the instructions' rubric). Fail → stay, or insert a prerequisite node.
 - Accept questions mid-step. Do not "finish the lesson" over them.
 - Give them things they can accept at face value only after the step they rest on is locked.
 - Log what happened in this chat (the transcript is the session log).
@@ -46,7 +46,8 @@ Walk the DAG. One node per turn.
 
 - Quiz after every node, not "at the end."
 - Prefer a short applied question over a recap prompt.
-- If they answer from vibe, ask one tighter question before advancing.
+- If they answer from vibe, credit it per the rubric, then ask the next
+  question at a fresh angle.
 
 ## What the system absorbs
 

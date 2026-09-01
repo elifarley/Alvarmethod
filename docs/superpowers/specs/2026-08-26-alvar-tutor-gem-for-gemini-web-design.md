@@ -142,19 +142,28 @@ the method.
      marked, never hinted by wording.
    - Never reveal the answer before the learner replies. No second question in the
      same message.
-   - On reply: score against the probe rubric (§5): `known` → next node;
-     `edge` → retry; `unknown` → insert a prerequisite. "D" marks the
-     strand `blocked` — do not guess, do not shame; it's map data. (Two
-     deltas from the pack's rubric, advertised: **(a)** row 2 is not the
-     pack's "correct, thin reason | edge" — a bare correct letter is
-     `edge` and locks as `known` when answered correct again on its retry,
-     because a compliant letter-only learner must be able to advance;
+   - On reply: score against the calibration (item 5): `known` → next
+     node; anything less → fresh-angle questions; prerequisites come only
+     from a foundation-missing wrong or D. "D" marks the
+     strand `blocked` — do not guess, do not shame; it's map data.
+     (Three deltas from the pack's rubric, advertised: **(a)** row 2
+     is not the pack's "correct, thin reason | edge" — a bare correct
+     letter is one credit of evidence, and lock-in demands breadth of
+     angles, not prose: three correct credits on three distinct angles
+     graduate, letter-only answers count fully (amended 2026-08-31 by
+     delta (c));
      **(b)** the pack allows `blocked` **or** `unknown` for D, the Gem
      hard-maps to `blocked` so D is always visible map data — and the
      pack's other blocked trigger, "the question needs a tool you don't
-     have," never applies in a runtime with no tools.)
-   - Applied questions over recap prompts; if they answer from vibe, ask one tighter
-     question before advancing.
+     have," never applies in a runtime with no tools; **(c)** amended 2026-08-31:
+     the rubric itself is replaced by the stricter credit-
+     ledger calibration (docs/superpowers/specs/2026-08-31-stricter-
+     edge-to-known-graduation-calibration-for-the-alvar-tutor-gem-
+     design.md §3) — graduation needs three correct credits on three
+     distinct angles, edge needs two credits, a wrong pops the newest
+     credit, and demotion or D clears the strand's credits.)
+   - Applied questions over recap prompts; if they answer from vibe, rotate to a
+     fresh angle before crediting.
 5. **Probe protocol** — start broad, binary-search every strand the lesson depends
    on, probing in batches of up to 3 questions (one per message), updating the
    map between batches and continuing until every strand is labeled; the stop
@@ -170,21 +179,26 @@ the method.
    rule, process.md:16: claims are cheap in chat and this runtime has no
    history to corroborate them. The same standard governs the huge-brief
    degradation path below — one rule, stated once, applied everywhere.)
-   Invite a talk-through: a right letter with a wrong reason is `edge`, not
-   `known`. Score every answer against the pack's rubric (ported from
-   `skills/probe/SKILL.md` @ 848c91c, with the two deliberate deltas
-   advertised in §4 above — this table IS what `edge` means; without
-   it the map is improvised):
+   Invite a talk-through: reasons sharpen evidence, never credits — a right
+   letter with a wrong reason earns only the letter's credit (amended
+   2026-08-31). Score every answer against the Gem's calibration (adapted
+   from the pack's rubric — `skills/probe/SKILL.md` @ 848c91c — with
+   the three deliberate deltas advertised in item 4 above; this table
+   IS what `edge` means; without it the map is improvised):
 
-   | result | status move |
+   | answer | credit |
    |---|---|
-   | correct + sound reason | `known` |
-   | correct letter alone | `edge`; locks `known` if answered correct
-     again on its retry (a compliant letter-only learner must be able to
-     advance — one retry, then lock-in, no essay demanded) |
-   | wrong, near-miss | `edge` |
-   | wrong, foundation missing | `unknown` |
-   | I don't know (D) | `blocked` |
+   | correct — letter alone or reasoned, on a fresh question | one `correct·angle` credit; each correct credit names a different angle (meaning / application / nuance-or-edge-case); wording-only variants share an angle |
+   | correct letter, unsound reasoning | still credits the letter's angle; the reasoning is noted, not scored |
+   | wrong, near-miss (right concept, wrong detail) | one `near-miss` credit — never adds an angle, never pops |
+   | wrong | pops the newest credit of any kind |
+   | wrong, foundation missing | demote `unknown`; credits cleared; insert a prerequisite |
+   | I don't know (D) | `blocked`; credits cleared |
+
+   Status from the evidence cell: 3 correct credits on 3 distinct angles →
+   `known`; 2+ credits → `edge`; fewer → `unknown`. A taught node starts a
+   fresh credit record — probe statuses only order the DAG. (Table
+   amended 2026-08-31 — delta (c).)
 
    After probing, print the map **once** as a markdown table
    `| strand | status | evidence |` with statuses `known / edge / unknown /
@@ -192,7 +206,8 @@ the method.
    on request and whenever **any** strand's status changes or a strand is
    added (a lock-in failure can flip `edge`→`unknown`; an inserted
    prerequisite adds a row), so the printed record never silently misstates
-   where the learner stands.
+   where the learner stands. The evidence cell IS the credit record — every
+   credit or pop rewrites that line (amended 2026-08-31).
 6. **Teach protocol** — one node per turn; accept interruptions (answer, then
    resume the same node unless the question reveals a missing prerequisite — then
    insert it); give "accept at face value" facts only after the step they rest on
@@ -286,7 +301,10 @@ loop to a text-audit pass and keeps design rules + failure list intact.
    **"Alvar Tutor"** → paste `INSTRUCTIONS.md` → upload the 5 `knowledge/` files →
    Save. (Free tier works; note that Gem quality improves on Advanced.)
 2. **Use**: open a fresh chat with the Gem, state a learning goal.
-3. **Smoke-test checklist** (the regression test — manual by nature):
+3. **Smoke-test checklist** (the regression test — manual by nature).
+   > Frozen snapshot (2026-08-31), non-normative: the live checklist is
+   `gems/alvar-tutor/README.md` §3 — items below predate the credit-ledger
+   amendment where not dated and are kept as design history:
    - [ ] **Turn-0 profiling**: fresh chat → 3–5 profile questions (covering
          the clusters: solid ground, goal, pace, struggle, voice, visuals)
          before the probe, and later teaching visibly honors them
@@ -295,13 +313,19 @@ loop to a text-audit pass and keeps design rules + failure list intact.
    - [ ] Correct answer not always first / not marked
    - [ ] Mermaid plan (code block) shown BEFORE any teaching
    - [ ] One reasoning step per message; no textbook dump
-   - [ ] Strand map printed as a table after probing; reprinted on request
-         and after ANY status change or strand insertion (test with a wrong
-         answer → retry/insert, then check the table)
+   - [ ] Strand map printed as a table after probing; evidence cells show
+         `correct·angle` / `near-miss` credits; reprinted on request, after
+         ANY status change or strand insertion, and the changed strand's
+         evidence cell rewrites on every credit or pop (test with a
+         foundation-missing wrong answer → demote + insert, then check the
+         table; a near-miss must NOT reprint while it does not flip
+         status) (amended 2026-08-31)
    - [ ] Mid-step question answered, then same node resumed
-   - [ ] Wrong quiz answer → retry or inserted prerequisite, not advance
-   - [ ] **Letter-only learner**: answers correct with just the letter twice →
-         the second answer locks the node and teaching advances
+   - [ ] Foundation-missing wrong → demote `unknown`, credits cleared,
+         prerequisite inserted, not advance (amended 2026-08-31)
+   - [ ] **Letter-only learner**: three correct letters on three different
+         angles lock the node and teaching advances; two correct answers
+         never advance a node (amended 2026-08-31)
    - [ ] **Multi-batch probe**: a goal needing >3 prerequisite strands → the
          probe continues in further one-question batches, updating the map,
          until every strand is labeled
@@ -311,7 +335,8 @@ loop to a text-audit pass and keeps design rules + failure list intact.
          surfaced sources; never taught as fact when unverified
    - [ ] Session end summary: locked / edge / next node
    - [ ] **D answer**: answer "D. I don't know" once → strand marked `blocked`,
-         no advance, no shame language, prerequisite inserted or strand skipped
+         its credits cleared, no advance, no shame language, prerequisite
+         inserted or strand skipped (amended 2026-08-31)
    - [ ] **Degradation — prose answer**: answer a quiz in prose instead of a
          letter → scored as signal, letter protocol restated once, no nagging
    - [ ] **Degradation — huge brief**: paste a large background brief → the
